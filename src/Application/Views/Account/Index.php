@@ -121,7 +121,7 @@ $areaName = "";
                     $divider = 4;
                     foreach ($ViewBag->Mails as $mail)
                     {
-        	            if ($idx % $divider == 0)
+                        if ($idx % $divider == 0)
                         {
                             if ($idx != 0) echo "</div>";
                             echo "<br />";
@@ -155,7 +155,7 @@ $areaName = "";
                     $divider = 3;
                     foreach ($ViewBag->Surveys as $survey)
                     {
-        	            if ($idx % $divider == 0)
+                        if ($idx % $divider == 0)
                         {
                             if ($idx != 0) echo "</div>";
                             echo "<br />";

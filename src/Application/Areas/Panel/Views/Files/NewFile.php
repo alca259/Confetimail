@@ -41,54 +41,54 @@ require_once("Application/Views/Shared/MessageBoxDialogs.html");
             read: function (options) {
                 $.ajax({
                     url: "<?php echo StringUtil::UrlAction($comboFileTypeAction, $controllerName, $areaName); ?>",
-			        dataType: "json",
-			        type: "POST",
-			        success: function (response) {
-			            if (response.success) {
-			                options.success(response.data);
-			            } else {
-			                AlertBox(response.message, "Warning", MessageBoxDialogs.ErrorIcon);
-			                // Prevent default error
-			                options.success([]);
-			            }
-			        },
-			        error: function (response) {
-			            AlertBox("Unknown error. Please, contact with the webmaster.", "Error", MessageBoxDialogs.ErrorIcon);
-			            console.log(response);
-			            // Prevent default error
-			            options.success([]);
-			        }
-			    });
-			}
-		}
-	});
+                    dataType: "json",
+                    type: "POST",
+                    success: function (response) {
+                        if (response.success) {
+                            options.success(response.data);
+                        } else {
+                            AlertBox(response.message, "Warning", MessageBoxDialogs.ErrorIcon);
+                            // Prevent default error
+                            options.success([]);
+                        }
+                    },
+                    error: function (response) {
+                        AlertBox("Unknown error. Please, contact with the webmaster.", "Error", MessageBoxDialogs.ErrorIcon);
+                        console.log(response);
+                        // Prevent default error
+                        options.success([]);
+                    }
+                });
+            }
+        }
+    });
 
     var dataAdapterFileCategories = new kendo.data.DataSource({
         transport: {
             read: function (options) {
                 $.ajax({
                     url: "<?php echo StringUtil::UrlAction($comboFileCategoryAction, $controllerName, $areaName); ?>",
-			        dataType: "json",
-			        type: "POST",
-			        success: function (response) {
-			            if (response.success) {
-			                options.success(response.data);
-			            } else {
-			                AlertBox(response.message, "Warning", MessageBoxDialogs.ErrorIcon);
-			                // Prevent default error
-			                options.success([]);
-			            }
-			        },
-			        error: function (response) {
-			            AlertBox("Unknown error. Please, contact with the webmaster.", "Error", MessageBoxDialogs.ErrorIcon);
-			            console.log(response);
-			            // Prevent default error
-			            options.success([]);
-			        }
-			    });
-			}
-		}
-	});
+                    dataType: "json",
+                    type: "POST",
+                    success: function (response) {
+                        if (response.success) {
+                            options.success(response.data);
+                        } else {
+                            AlertBox(response.message, "Warning", MessageBoxDialogs.ErrorIcon);
+                            // Prevent default error
+                            options.success([]);
+                        }
+                    },
+                    error: function (response) {
+                        AlertBox("Unknown error. Please, contact with the webmaster.", "Error", MessageBoxDialogs.ErrorIcon);
+                        console.log(response);
+                        // Prevent default error
+                        options.success([]);
+                    }
+                });
+            }
+        }
+    });
 
     $(document).ready(function () {
 
@@ -109,9 +109,9 @@ require_once("Application/Views/Shared/MessageBoxDialogs.html");
 
         // ############# Button Actions ############## //
         $("#FileInput").kendoUpload({
-		    localization: {
-		        select: "Selecciona o arrastra los ficheros para subir..."
-		    }
+            localization: {
+                select: "Selecciona o arrastra los ficheros para subir..."
+            }
         });
 
         <?php
@@ -120,7 +120,7 @@ require_once("Application/Views/Shared/MessageBoxDialogs.html");
             echo "AlertBox(\"".$ViewBag->Error."\", 'Error', MessageBoxDialogs.ErrorIcon);";
         }
         ?>
-	});
+    });
 
 </script>
 

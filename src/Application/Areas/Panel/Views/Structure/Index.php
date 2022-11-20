@@ -80,10 +80,10 @@ require_once('Application/Views/Shared/WindowNotification.html');
         }
     }
 
-	$(document).ready(function() {
+    $(document).ready(function() {
 
         // Init components
-	    $("#<?php echo $gridName; ?>").kendoGrid({
+        $("#<?php echo $gridName; ?>").kendoGrid({
             dataSource: {
                 type: "odata",
                 transport: {
@@ -132,23 +132,23 @@ require_once('Application/Views/Shared/WindowNotification.html');
                 serverSorting: false,
                 sort: { field: "ModelName", dir: "asc" }
             },
-	        height: 550,
-	        filterable: true,
-	        resizable: true,
-	        groupable: true,
-	        reorderable: true,
-	        sortable: {
-	            mode: "multiple",
-	            allowUnsort: true
-	        },
-	        pageable: {
-	            numeric: false,
-	            previousNext: false,
-	            refresh: true,
-	        },
-	        scrollable: {
-	            virtual: true
-	        },
+            height: 550,
+            filterable: true,
+            resizable: true,
+            groupable: true,
+            reorderable: true,
+            sortable: {
+                mode: "multiple",
+                allowUnsort: true
+            },
+            pageable: {
+                numeric: false,
+                previousNext: false,
+                refresh: true,
+            },
+            scrollable: {
+                virtual: true
+            },
             dataBound: onDataBound,
             toolbar: [{
                 name: "custom-search",
@@ -200,10 +200,10 @@ require_once('Application/Views/Shared/WindowNotification.html');
         });
 
         // Se ejecuta cuando se busca modelos nuevos
-	    $("#<?php echo $gridName; ?>").on("click", ".k-grid-custom-search", function (e) {
+        $("#<?php echo $gridName; ?>").on("click", ".k-grid-custom-search", function (e) {
             //custom actions
-	        e.preventDefault();
-	        showLoading(true);
+            e.preventDefault();
+            showLoading(true);
 
             $.ajax({
                 url: "<?php echo StringUtil::UrlAction($modelSearchAction, $controllerName, $areaName); ?>",
@@ -227,7 +227,7 @@ require_once('Application/Views/Shared/WindowNotification.html');
         });
 
         // Se ejecuta si instala un modelo
-	    $("#<?php echo $gridName; ?>").on("click", ".k-grid-custom-install", function (e) {
+        $("#<?php echo $gridName; ?>").on("click", ".k-grid-custom-install", function (e) {
             //custom actions
             e.preventDefault();
             var dataItem = $("#<?php echo $gridName; ?>").data('kendoGrid').dataItem($(e.currentTarget).closest("tr"));
@@ -235,7 +235,7 @@ require_once('Application/Views/Shared/WindowNotification.html');
         });
 
         // Se ejecuta si se actualiza un modelo
-	    $("#<?php echo $gridName; ?>").on("click", ".k-grid-custom-upgrade", function (e) {
+        $("#<?php echo $gridName; ?>").on("click", ".k-grid-custom-upgrade", function (e) {
             //custom actions
             e.preventDefault();
             var dataItem = $("#<?php echo $gridName; ?>").data('kendoGrid').dataItem($(e.currentTarget).closest("tr"));
@@ -243,19 +243,19 @@ require_once('Application/Views/Shared/WindowNotification.html');
         });
 
         // Se ejecuta si se elimina un modelo
-	    $("#<?php echo $gridName; ?>").on("click", ".k-grid-custom-drop", function (e) {
+        $("#<?php echo $gridName; ?>").on("click", ".k-grid-custom-drop", function (e) {
             //custom actions
             e.preventDefault();
             var dataItem = $("#<?php echo $gridName; ?>").data('kendoGrid').dataItem($(e.currentTarget).closest("tr"));
             DeleteBox(crudModel_Callback, {dataItem: dataItem, action: "Drop", message: "Modelo eliminado"});
-	    });
+        });
 
-	    $(window).resize(function () {
-	        resizeGrid("<?php echo "#".$gridName; ?>");
-	    });
+        $(window).resize(function () {
+            resizeGrid("<?php echo "#".$gridName; ?>");
+        });
 
-	    setTimeout(function () { resizeGrid("<?php echo "#".$gridName; ?>"); }, 100);
-	});
+        setTimeout(function () { resizeGrid("<?php echo "#".$gridName; ?>"); }, 100);
+    });
 </script>
 
 <!-- Main -->

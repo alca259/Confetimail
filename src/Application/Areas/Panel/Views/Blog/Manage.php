@@ -293,22 +293,22 @@ require_once("Application/Views/Shared/WindowConfirmDelete.html");
 
         // Init vars
         var toolsVar = [
-			"bold", "italic", "underline", "strikethrough", "justifyLeft", "justifyCenter",
-			"justifyRight", "justifyFull", "insertUnorderedList", "insertOrderedList",
-			"indent", "outdent", "createLink", "unlink", "insertImage", "insertFile",
-			"subscript", "superscript", "createTable", "addRowAbove", "addRowBelow",
-			"addColumnLeft", "addColumnRight", "deleteRow", "deleteColumn", "viewHtml",
-			"formatting", "cleanFormatting", "fontName", "fontSize", "foreColor", "backColor",
-			{
-			    name: "person",
-			    tooltip: "Inserta un campo persona",
-			    template: "<a href='' role='button' class='k-tool k-group-start' title='Persona'>" +
-							"<img src='" + PathImages + "ui/btnUser.png' /></a>",
-			    exec: function (e) {
-			        var editor = $(this).data("kendoEditor");
-			        editor.exec("inserthtml", { value: "{DisplayUser}" });
-			    }
-			}
+            "bold", "italic", "underline", "strikethrough", "justifyLeft", "justifyCenter",
+            "justifyRight", "justifyFull", "insertUnorderedList", "insertOrderedList",
+            "indent", "outdent", "createLink", "unlink", "insertImage", "insertFile",
+            "subscript", "superscript", "createTable", "addRowAbove", "addRowBelow",
+            "addColumnLeft", "addColumnRight", "deleteRow", "deleteColumn", "viewHtml",
+            "formatting", "cleanFormatting", "fontName", "fontSize", "foreColor", "backColor",
+            {
+                name: "person",
+                tooltip: "Inserta un campo persona",
+                template: "<a href='' role='button' class='k-tool k-group-start' title='Persona'>" +
+                            "<img src='" + PathImages + "ui/btnUser.png' /></a>",
+                exec: function (e) {
+                    var editor = $(this).data("kendoEditor");
+                    editor.exec("inserthtml", { value: "{DisplayUser}" });
+                }
+            }
         ];
 
         // Init gui editors
@@ -344,7 +344,7 @@ require_once("Application/Views/Shared/WindowConfirmDelete.html");
                     imageUrl: function (path, name) {
                         //return "<?php echo Constants::GetMailImagesPath(); ?>" + "/" + path;
                         return "/" + path;
-				    }
+                    }
                 }
             }
         });

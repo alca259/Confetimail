@@ -1,9 +1,9 @@
 <?php
 class MindException extends Exception
 {
-	function __construct($message = null)
+    function __construct($message = null)
     {
-		parent::__construct($message, 0, null);
-	}
+        parent::__construct($message, 0, null);
+    }
 }
 ?>

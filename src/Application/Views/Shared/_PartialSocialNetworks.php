@@ -2,7 +2,7 @@
 
 #region Instagram
 // Authorization URL: https://instagram.com/oauth/authorize/?client_id=93357bc33c034ede89e87b7642d90c4f&redirect_uri=http://www.confetimail.net/&response_type=token
-$Instagram_Access_Token = "1447014547.93357bc.5d242c204b61413a936f0630ade53eef";
+$Instagram_Access_Token = "";
 $Instagram_Self_Feed_Url = "https://api.instagram.com/v1/users/self/media/recent?count=2&access_token=".$Instagram_Access_Token;
 
 $instagram_json = file_get_contents($Instagram_Self_Feed_Url);
@@ -12,7 +12,7 @@ $instagram_object = JsonHandler::NormalDecode($instagram_json);
 #region Facebook
 // Test URL: /posts?fields=message,picture,created_time,caption,source&limit=10
 /*
-$Facebook_Access_Token = "CAACEdEose0cBADHtLhpRnEqIrxoJZBLnIJwGAeNmLBEpLUsgUBTR9NzebdHnduU4FSWrZA2ZAcwT5EAMLaG6SP14jGPpuMZBHeFz0SwXZBQdmErZAQ4U6UwhxTfU5sEi6UsN9HMEZAsZBHUFjwYACZBymn0BBZCfdlFKWPwSzTVa5iH8C4IM9JpX2jwtNgEd8r1EIhAcewjT3xqgZDZD";
+$Facebook_Access_Token = "";
 $Facebook_Confeti_Page_Id = "258907884293773";
 $Facebook_Self_Feed_Url = sprintf("https://graph.facebook.com/v2.4/%s/posts?fields=message,picture,created_time&limit=10&access_token=%s", $Facebook_Confeti_Page_Id, $Facebook_Access_Token);
 

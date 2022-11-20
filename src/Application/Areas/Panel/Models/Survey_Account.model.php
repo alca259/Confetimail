@@ -1,13 +1,13 @@
 <?php
 class Survey_AccountModel extends ModelBase
 {
-	public function __construct($db, $iniciar = false)
+    public function __construct($db, $iniciar = false)
     {
-		$this->name = "survey_account";
-		$this->table = "survey_account";
-		$this->columns = array (
+        $this->name = "survey_account";
+        $this->table = "survey_account";
+        $this->columns = array (
             "user_id" => new Many2one("User", "account", Constants::$PanelAreaName),
-			"entertainment_recommendation" => new Boolean("Recomendación de ocio"),
+            "entertainment_recommendation" => new Boolean("Recomendación de ocio"),
             "general_recommendation" => new Boolean("Recomendación general"),
             "background_icons_web" => new Boolean("Fondos e iconos para Web"),
             "calendars" => new Boolean("Calendarios"),
@@ -16,9 +16,9 @@ class Survey_AccountModel extends ModelBase
             "photographs" => new Boolean("Fotografías"),
             "wallpapers" => new Boolean("Fondos de escritorio"),
             "bullet_point" => new Boolean("Viñeta"),
-		);
-		parent::__construct($db, $iniciar);
-	}
+        );
+        parent::__construct($db, $iniciar);
+    }
     
     /**
      * Summary of GetSurveyFields

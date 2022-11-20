@@ -2,26 +2,26 @@
 
 class AccountController extends BaseController 
 {
-	#region Variables privadas
+    #region Variables privadas
     private $controllerName;
     #endregion
 
     #region Constructor
-	public function __construct() 
+    public function __construct() 
     {
-		// Llamamos al constructor padre
-		parent::__construct();
+        // Llamamos al constructor padre
+        parent::__construct();
         $this->controllerName = str_replace("Controller", "", __CLASS__);
-	}
+    }
     #endregion
 
-	#region Controller Actions
+    #region Controller Actions
     /**
      * Carga la vista de perfil
      * @author alca259
      * @version OK
      */
-	public function Index()
+    public function Index()
     {
         #region Pestaña confetis
         // Buscamos la fecha de registro del usuario
@@ -104,29 +104,29 @@ class AccountController extends BaseController
         $this->ViewBag->CurrentMenu = "Account";
         $this->ViewBag->Title = T_("My.Account");
         return new View(__FUNCTION__, $this->controllerName, $this->ViewBag);
-	}
+    }
 
     /**
      * Desloguea a un usuario y destruye la sesión
      * @author alca259
      * @version OK
      */
-	public function Logout()
+    public function Logout()
     {
-		if (Security::IsOnline()) 
+        if (Security::IsOnline()) 
         {
-			Security::LogoutUser();
-		}
+            Security::LogoutUser();
+        }
 
         return parent::RedirectToAction();
-	}
+    }
 
     /**
      * Autentica a un usuario y reencripta su contraseña cada vez
      * @author alca259
      * @version OK
      */
-	public function Login() 
+    public function Login() 
     {
         if (Security::IsOnline())
         {
@@ -166,19 +166,19 @@ class AccountController extends BaseController
         
         // Correcto
         return parent::RedirectToAction();
-	}
+    }
 
     /**
      * Registra a un usuario en el sistema y le envia el ultimo confeti publicado
      * @author alca259
      * @version OK
      */
-	public function Subscribe() 
+    public function Subscribe() 
     {
         $this->ViewBag->CurrentMenu = "Subscribe";
         $this->ViewBag->Title = T_("Subscribe");
         return new View(__FUNCTION__, $this->controllerName, $this->ViewBag);
-	}
+    }
     #endregion
 
     #region Ajax Actions
@@ -289,19 +289,19 @@ class AccountController extends BaseController
             // Comparamos las contraseñas
             if ($currentUser[0]['password'] != $valuePassword)
             {
-			    throw new Exception(T_("User.Invalid.Credentials"));
-		    }
+                throw new Exception(T_("User.Invalid.Credentials"));
+            }
             
-		    // Comprobamos que sean iguales
-		    if ($json_data["NewPassword"] != $json_data["RetypePassword"])
+            // Comprobamos que sean iguales
+            if ($json_data["NewPassword"] != $json_data["RetypePassword"])
             {
-			    throw new Exception(T_("Passwords.Not.Match"));
-		    }
+                throw new Exception(T_("Passwords.Not.Match"));
+            }
             
             // Rellenamos los datos faltantes
             $data = array();
-		    $data['password_salt'] = StringUtil::RandString(200);
-		    $data['password'] = parent::CryptPassword($json_data["NewPassword"], $data['password_salt']);
+            $data['password_salt'] = StringUtil::RandString(200);
+            $data['password'] = parent::CryptPassword($json_data["NewPassword"], $data['password_salt']);
 
             // Modificamos en DB los datos del usuario
             $this->accountModel->Write($_SESSION['GUID'], array($_SESSION['GUID']), $data);
@@ -423,8 +423,8 @@ class AccountController extends BaseController
             // Si no existe el directorio lo creamos
             if (!file_exists($UploadDirectory))
             {
-			    mkdir($UploadDirectory, 0755, true);
-		    }
+                mkdir($UploadDirectory, 0755, true);
+            }
             
             #region ########### Server Validation ###########
             // Is file size is less than allowed size.
@@ -518,7 +518,7 @@ class AccountController extends BaseController
             }
                        
             // Fill vars form
-		    $valuePassword = $json_data["Password"];
+            $valuePassword = $json_data["Password"];
             
             $itemData = array(
                 "name" => $json_data["Name"],
@@ -526,62 +526,62 @@ class AccountController extends BaseController
                 "password" => $json_data["Password"]
             );
 
-		    // Comprobamos que sean iguales
-		    if ($json_data["Password"] != $json_data["VerifyPassword"])
+            // Comprobamos que sean iguales
+            if ($json_data["Password"] != $json_data["VerifyPassword"])
             {
-			    throw new Exception(T_("Passwords.Not.Match"));
-		    }
+                throw new Exception(T_("Passwords.Not.Match"));
+            }
 
-		    // Action vars
-		    $data = array();
+            // Action vars
+            $data = array();
 
-		    // Comprobamos si hay algun campo obligatorio
-		    foreach ($itemData as $key => $value)
+            // Comprobamos si hay algun campo obligatorio
+            foreach ($itemData as $key => $value)
             {
-			    if (array_key_exists($key, $this->accountModel->columns))
+                if (array_key_exists($key, $this->accountModel->columns))
                 {
-				    if ($this->accountModel->columns[$key]->getRequired() && empty($value))
+                    if ($this->accountModel->columns[$key]->getRequired() && empty($value))
                     {
-					    throw new Exception(sprintf(T_("Field.X.Required"), $this->accountModel->columns[$key]->getTitle()));
-				    }
+                        throw new Exception(sprintf(T_("Field.X.Required"), $this->accountModel->columns[$key]->getTitle()));
+                    }
                     else
                     {
-					    $data[$key] = $value;
-				    }
-			    }
-		    }
+                        $data[$key] = $value;
+                    }
+                }
+            }
 
-		    // Comprobamos si el correo ya esta suscrito
-		    $domain = array ( 
+            // Comprobamos si el correo ya esta suscrito
+            $domain = array ( 
                 array("email", "=", $data['email']),
                 // No tiene sentido filtrar por si está suscrito o no,
                 // el usuario puede cambiar esta opción en su panel
                 // array("subscribed", "=", true)
             );
 
-		    $results_search = $this->accountModel->Search(ROOT_USER, $domain);
+            $results_search = $this->accountModel->Search(ROOT_USER, $domain);
 
             if (!empty($results_search))
             {
-			    throw new Exception(sprintf(T_("Mail.Exists"), $data['email']));
-		    }
+                throw new Exception(sprintf(T_("Mail.Exists"), $data['email']));
+            }
             
-		    // Rellenamos los datos faltantes
-		    $data['username'] = strtolower($data['email']);
-		    $data['password_salt'] = StringUtil::RandString(200);
-		    $data['password'] = parent::CryptPassword($valuePassword, $data['password_salt']);
-		    $data['subscribed'] = true;
+            // Rellenamos los datos faltantes
+            $data['username'] = strtolower($data['email']);
+            $data['password_salt'] = StringUtil::RandString(200);
+            $data['password'] = parent::CryptPassword($valuePassword, $data['password_salt']);
+            $data['subscribed'] = true;
             $data['active'] = true;
 
-		    // Creamos el usuario y obtenemos su ID
-		    $user_id = $this->accountModel->Create(ROOT_USER, $data);
+            // Creamos el usuario y obtenemos su ID
+            $user_id = $this->accountModel->Create(ROOT_USER, $data);
             $_SESSION['GUID'] = ROOT_USER;
 
-		    // Mandamos el correo de confirmacion
-		    $mensaje = sprintf(T_("Mail.New.Register.Body"), $data['name'], $data['email']);
-		    $email = new Mailer('info@confetimail.net', T_("Mail.New.Register.Subject"), $mensaje);
-		    // Recojemos el resultado del envio
-		    $statusMail = $email->Send();
+            // Mandamos el correo de confirmacion
+            $mensaje = sprintf(T_("Mail.New.Register.Body"), $data['name'], $data['email']);
+            $email = new Mailer('info@confetimail.net', T_("Mail.New.Register.Subject"), $mensaje);
+            // Recojemos el resultado del envio
+            $statusMail = $email->Send();
 
             $result["message"] = $statusMail 
                 ? T_("Mail.Subscribe.Success")
@@ -589,28 +589,28 @@ class AccountController extends BaseController
 
             // No se filtra por fechas, porque en el caso de que no se publique un confeti en dos meses
             // el usuario no recibe nada
-		    // $original = new DateTime('NOW');
-		    // $previous = DateTime::createFromFormat('U',
-			//	    strtotime('first day of last month', ($original->format('U'))),
-			//	    new DateTimeZone('UTC'));
+            // $original = new DateTime('NOW');
+            // $previous = DateTime::createFromFormat('U',
+            //      strtotime('first day of last month', ($original->format('U'))),
+            //      new DateTimeZone('UTC'));
 
-		    // Intentamos enviarle el último correo marcado como enviable
-		    // Creamos la busqueda de validacion
-		    $domain_model = array(
-			    array("active", "=", 1),
+            // Intentamos enviarle el último correo marcado como enviable
+            // Creamos la busqueda de validacion
+            $domain_model = array(
+                array("active", "=", 1),
                 array("is_confeti", "=", 1),
-			//    array("date_send", ">=", $previous->format('Y-m-d'))
-		    );
+            //    array("date_send", ">=", $previous->format('Y-m-d'))
+            );
 
-		    // Buscamos aquellos emails que coincidan
-		    $sModel = $this->mailModel->Search($_SESSION['GUID'], $domain_model, "date_send DESC");
+            // Buscamos aquellos emails que coincidan
+            $sModel = $this->mailModel->Search($_SESSION['GUID'], $domain_model, "date_send DESC");
 
-		    // Si lo encontramos, lo obtenemos
-		    if (!empty($sModel))
+            // Si lo encontramos, lo obtenemos
+            if (!empty($sModel))
             {
-			    $items = $this->mailModel->Browse($_SESSION['GUID'], array($sModel[0]));
+                $items = $this->mailModel->Browse($_SESSION['GUID'], array($sModel[0]));
                 parent::SendConfetiMailToUser($sModel[0], $user_id, $items);
-		    }
+            }
 
             $_SESSION['GUID'] = null;
 
@@ -632,7 +632,7 @@ class AccountController extends BaseController
     }
     #endregion
     
-	#region Private methods
+    #region Private methods
     /**
      * Realiza un login con el email y contraseña proporcionados
      * @param string $email Email del usuario
@@ -646,8 +646,8 @@ class AccountController extends BaseController
 
         try
         {
-		    // Action vars
-		    $itemData = array(
+            // Action vars
+            $itemData = array(
                 "email" => $email,
                 "password" => $password
             );
@@ -657,63 +657,63 @@ class AccountController extends BaseController
             $data = array();
             
             // Comprobamos si hay algun campo obligatorio
-		    foreach ($itemData as $key => $value)
+            foreach ($itemData as $key => $value)
             {
-			    if (array_key_exists($key, $this->accountModel->columns))
+                if (array_key_exists($key, $this->accountModel->columns))
                 {
-				    if ($this->accountModel->columns[$key]->getRequired() && empty($value))
+                    if ($this->accountModel->columns[$key]->getRequired() && empty($value))
                     {
-					    throw new Exception(sprintf(T_("Field.X.Required"), $this->accountModel->columns[$key]->getTitle()));
-				    }
+                        throw new Exception(sprintf(T_("Field.X.Required"), $this->accountModel->columns[$key]->getTitle()));
+                    }
                     else
                     {
-					    $data[$key] = $value;
-				    }
-			    }
-		    }
+                        $data[$key] = $value;
+                    }
+                }
+            }
 
-		    // Creamos el filtro para buscar al usuario
-		    $domain_user = array (
+            // Creamos el filtro para buscar al usuario
+            $domain_user = array (
                 array("username", "=", $data['email']),
                 array("active", "=", true)
             );
 
-		    $sUser = $this->accountModel->Search(ROOT_USER, $domain_user);
+            $sUser = $this->accountModel->Search(ROOT_USER, $domain_user);
             
             if (empty($sUser))
             {
-			    throw new Exception(sprintf(T_("User.Not.Exists.Or.Not.Active"), $data['email']));
-		    }
+                throw new Exception(sprintf(T_("User.Not.Exists.Or.Not.Active"), $data['email']));
+            }
 
-		    // El usuario existe, buscamos sus datos
-		    $bUser = $this->accountModel->Browse(ROOT_USER, $sUser);
+            // El usuario existe, buscamos sus datos
+            $bUser = $this->accountModel->Browse(ROOT_USER, $sUser);
 
-		    // Obtenemos el primero
-		    $bUser = $bUser[0];
+            // Obtenemos el primero
+            $bUser = $bUser[0];
 
-		    // Preparamos la contraseña enviada para la validacion
+            // Preparamos la contraseña enviada para la validacion
             $valuePassword = parent::CryptPassword($valuePassword, $bUser['password_salt']);
 
             // Comparamos las contraseñas
             if ($bUser['password'] != $valuePassword)
             {
-			    throw new Exception(T_("User.Invalid.Credentials"));
-		    }
+                throw new Exception(T_("User.Invalid.Credentials"));
+            }
             
-		    // Login correcto, generamos un nuevo salt y volvemos a encriptar la contraseña
-		    $data['password_salt'] = StringUtil::RandString(200);
-		    $data['password'] = parent::CryptPassword($data['password'], $data['password_salt']);
+            // Login correcto, generamos un nuevo salt y volvemos a encriptar la contraseña
+            $data['password_salt'] = StringUtil::RandString(200);
+            $data['password'] = parent::CryptPassword($data['password'], $data['password_salt']);
             
             // Actualizamos el ultimo login y capturamos el ultimo en una variable de sesion
             $_SESSION['LAST_LOGIN'] = $bUser["last_login"] != null ? $bUser["last_login"] : date("Y-m-d");
             $data['last_login'] = date("Y-m-d H:i:s");
 
-		    // Actualizamos los datos
-		    $this->accountModel->Write(ROOT_USER, $sUser, $data);
+            // Actualizamos los datos
+            $this->accountModel->Write(ROOT_USER, $sUser, $data);
 
-		    // Comprobamos si se han producido errores
-		    // Generamos la sesion
-		    Security::LoginUser($bUser);
+            // Comprobamos si se han producido errores
+            // Generamos la sesion
+            Security::LoginUser($bUser);
             
             $result["success"] = true;
         }

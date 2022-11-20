@@ -317,17 +317,17 @@ $gridName = "gridUsers";
 <!-- Main -->
 <div id="main">
 
-	<!-- Intro -->
-	<section id="options">
-		<header>
-			<h2>Administraci&oacute;n de usuarios</h2>
-		</header>
+    <!-- Intro -->
+    <section id="options">
+        <header>
+            <h2>Administraci&oacute;n de usuarios</h2>
+        </header>
 
         <div id="users-management">
             <div id="tabstrip" class="k-content">
                 <div id="<?php echo $gridName; ?>"></div>
             </div>
         </div>
-	</section>
+    </section>
 
 </div>

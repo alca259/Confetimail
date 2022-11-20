@@ -81,7 +81,7 @@ class GlobalConfig
         // Registering models for each area
         foreach (self::$registeredPathAreas as $pathName => $pathArea)
         {
-        	self::LoadFiles($pathArea."/Models/");
+            self::LoadFiles($pathArea."/Models/");
         }
     }
     

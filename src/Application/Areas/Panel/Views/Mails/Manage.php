@@ -21,37 +21,37 @@ $mailImageThumbnail = "/Application/Helpers/Thumbnail";
 <!-- Main -->
 <div id="main">
 
-	<!-- Intro -->
-	<section id="options">
+    <!-- Intro -->
+    <section id="options">
 
-		<header>
-			<h2>Administraci&oacute;n de e-mails</h2>
-		</header>
+        <header>
+            <h2>Administraci&oacute;n de e-mails</h2>
+        </header>
 
-		<div id="dialog-new-mail">
-			<div class="actions">
-				<input type="button" id="btnCancel" value="Volver atr&aacute;s" data-bind="click: ReturnMainPage" />
-			</div>
+        <div id="dialog-new-mail">
+            <div class="actions">
+                <input type="button" id="btnCancel" value="Volver atr&aacute;s" data-bind="click: ReturnMainPage" />
+            </div>
 
-			<div id="tabstrip" class="k-content">
-				<ul>
-					<li class="k-state-active">
-						Email
-					</li>
-					<li data-bind="visible: EnableTabs">
-						Adjuntos
-					</li>
-					<li data-bind="visible: EnableTabs">
-						Enviados
-					</li>
-				</ul>
+            <div id="tabstrip" class="k-content">
+                <ul>
+                    <li class="k-state-active">
+                        Email
+                    </li>
+                    <li data-bind="visible: EnableTabs">
+                        Adjuntos
+                    </li>
+                    <li data-bind="visible: EnableTabs">
+                        Enviados
+                    </li>
+                </ul>
 
-				<div>
-					<div class="actions">
-						<input type="button" id="btnSave" value="Guardar" class="k-primary" data-bind="click: SaveMail" />
-					</div>
+                <div>
+                    <div class="actions">
+                        <input type="button" id="btnSave" value="Guardar" class="k-primary" data-bind="click: SaveMail" />
+                    </div>
 
-					<input type="hidden" name="mail_id" id="mail_id" data-bind="value: IdMail" />
+                    <input type="hidden" name="mail_id" id="mail_id" data-bind="value: IdMail" />
 
                     <div class="container">
                     <div class="row">
@@ -91,74 +91,74 @@ $mailImageThumbnail = "/Application/Helpers/Thumbnail";
                     </div>
                     </div>
 
-					<hr />
+                    <hr />
                     <ul id="panelbar">
                         <li>
                             <span class="k-link">Cabecera nuevos</span>
-					        <div class="linForm">
-							    <textarea id="header_for_new" style="width:100%;height:500px" data-bind="value: HeaderNew"></textarea>
-					        </div>
+                            <div class="linForm">
+                                <textarea id="header_for_new" style="width:100%;height:500px" data-bind="value: HeaderNew"></textarea>
+                            </div>
                         </li>
                         <li>
                             <span class="k-link">Cabecera viejos</span>
-					        <div class="linForm">
-							    <textarea id="header_for_old" style="width:100%;height:500px" data-bind="value: HeaderOld"></textarea>
-					        </div>
+                            <div class="linForm">
+                                <textarea id="header_for_old" style="width:100%;height:500px" data-bind="value: HeaderOld"></textarea>
+                            </div>
                         </li>
                         <li class="k-state-active">
                             <span class="k-link k-state-selected">Mensaje</span>
-					        <div class="linForm">
-							    <textarea id="body_message" style="width:100%;height:500px" data-bind="value: Message"></textarea>
-					        </div>
+                            <div class="linForm">
+                                <textarea id="body_message" style="width:100%;height:500px" data-bind="value: Message"></textarea>
+                            </div>
                         </li>
                     </ul>
-				</div>
-				
+                </div>
+                
                 <div>
-					<div class="actions">
-						<input type="button" id="btnBindFile" class="k-primary" value="Víncular seleccionados" data-bind="click: ToggleAttachments" data-parameter="true" />
-						<input type="button" id="btnUnbindFile" value="Desvíncular seleccionados" data-bind="click: ToggleAttachments" data-parameter="false" />
-					</div>
+                    <div class="actions">
+                        <input type="button" id="btnBindFile" class="k-primary" value="Víncular seleccionados" data-bind="click: ToggleAttachments" data-parameter="true" />
+                        <input type="button" id="btnUnbindFile" value="Desvíncular seleccionados" data-bind="click: ToggleAttachments" data-parameter="false" />
+                    </div>
 
-					<div id='<?php echo $gridFilesName; ?>'></div>
-				</div>
+                    <div id='<?php echo $gridFilesName; ?>'></div>
+                </div>
 
-				<div>
-					<div class="actions">
-						<input type="button" id="btnSend" class="k-primary" value="Enviar seleccionados" data-bind="click: SendMails" data-parameter="false" />
-						<input type="button" id="btnResend" value="Re-enviar seleccionados" data-bind="click: SendMails" data-parameter="true" />
-					</div>
+                <div>
+                    <div class="actions">
+                        <input type="button" id="btnSend" class="k-primary" value="Enviar seleccionados" data-bind="click: SendMails" data-parameter="false" />
+                        <input type="button" id="btnResend" value="Re-enviar seleccionados" data-bind="click: SendMails" data-parameter="true" />
+                    </div>
 
-					<div id='<?php echo $gridUsersName; ?>'></div>
-				</div>
-			</div>
-		</div>
-	</section>
+                    <div id='<?php echo $gridUsersName; ?>'></div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
 <style type="text/css">
-	#dialog-new-mail {
-		padding-bottom: 80px;
-		width: 100%;
-		margin: 0 auto;
-	}
+    #dialog-new-mail {
+        padding-bottom: 80px;
+        width: 100%;
+        margin: 0 auto;
+    }
 
     #dialog-new-mail .row {
         margin-bottom: 10px;
     }
 
-	#dialog-new-mail #mail_id {
-		display: none;
-	}
+    #dialog-new-mail #mail_id {
+        display: none;
+    }
 
-	#dialog-new-mail .row label {
-		max-width: 24.5%;
-		min-width: 240px;
-		display: inline-block;
-		margin-top: 10px;
-		font-size: 12pt;
-		font-weight: bold;
-	}
+    #dialog-new-mail .row label {
+        max-width: 24.5%;
+        min-width: 240px;
+        display: inline-block;
+        margin-top: 10px;
+        font-size: 12pt;
+        font-weight: bold;
+    }
 
     #dialog-new-mail input[type="text"], #dialog-new-mail input[type="datetime"], #dialog-new-mail .k-datepicker {
         width: 100%;
@@ -168,14 +168,14 @@ $mailImageThumbnail = "/Application/Helpers/Thumbnail";
         width: 84%;
     }
 
-	#dialog-new-mail hr {
-		border: 1px solid rgb(66, 139, 202);
-		margin: 30px 0;
-	}
+    #dialog-new-mail hr {
+        border: 1px solid rgb(66, 139, 202);
+        margin: 30px 0;
+    }
 
-	#dialog-new-mail #gridPeople {
-		margin: 10px auto 0 auto;
-	}
+    #dialog-new-mail #gridPeople {
+        margin: 10px auto 0 auto;
+    }
 
     .k-widget.k-window {
         width: 950px;
@@ -519,13 +519,13 @@ require_once("Application/Views/Shared/WindowImageBrowser.html");
 
 <!-- Inicializacion de grids -->
 <script type="text/javascript">
-	/* ############# Initializing data methods ############### */
-	function initGridAttachments() {
-		// Init components
-		var grid = $("#<?php echo $gridFilesName ?>").kendoGrid({
-			dataSource: {
-				type: "odata",
-				transport: {
+    /* ############# Initializing data methods ############### */
+    function initGridAttachments() {
+        // Init components
+        var grid = $("#<?php echo $gridFilesName ?>").kendoGrid({
+            dataSource: {
+                type: "odata",
+                transport: {
                     read: function (options) {
                         options.data.IdMail = viewModel.IdMail;
 
@@ -553,115 +553,115 @@ require_once("Application/Views/Shared/WindowImageBrowser.html");
                             }
                         });
                     }
-				},
-				schema: {
-					data: "rows",
-					total: "totalCount",
-					model: {
-						id: "file_id",
-						fields: {
-							file_id: { type: "number" },
-							file_name: { type: "string" },
-							file_url: { type: "string" },
-							full_url: { type: "string" },
-							file_type: { type: "string" },
-							mail_bind: { type: "string" },
+                },
+                schema: {
+                    data: "rows",
+                    total: "totalCount",
+                    model: {
+                        id: "file_id",
+                        fields: {
+                            file_id: { type: "number" },
+                            file_name: { type: "string" },
+                            file_url: { type: "string" },
+                            full_url: { type: "string" },
+                            file_type: { type: "string" },
+                            mail_bind: { type: "string" },
                             file_date: { type: "date" }
-						}
-					}
-				},
-				error: function (e) {
-					e.preventDefault();
-				},
-				pageSize: 500,
-				serverPaging: false,
-				serverFiltering: false,
-				serverSorting: false,
-				sort: [
+                        }
+                    }
+                },
+                error: function (e) {
+                    e.preventDefault();
+                },
+                pageSize: 500,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false,
+                sort: [
                     { field: 'mail_bind', dir: 'desc' },
                     { field: 'file_date', dir: 'desc' },
-				]
-			},
-		    height: 550,
-		    filterable: true,
-		    resizable: true,
-		    groupable: true,
-		    reorderable: true,
-		    sortable: {
-		        mode: "multiple",
-		        allowUnsort: true
-		    },
-		    pageable: {
-		        numeric: false,
-		        previousNext: false,
-		        refresh: true,
-		    },
-		    scrollable: {
-		        virtual: true
-		    },
-			dataBound: onDataBoundAttachments,
-			columns: [
-				{
-					template: "<input type='checkbox' class='checkbox' />",
-					width: "40px",
+                ]
+            },
+            height: 550,
+            filterable: true,
+            resizable: true,
+            groupable: true,
+            reorderable: true,
+            sortable: {
+                mode: "multiple",
+                allowUnsort: true
+            },
+            pageable: {
+                numeric: false,
+                previousNext: false,
+                refresh: true,
+            },
+            scrollable: {
+                virtual: true
+            },
+            dataBound: onDataBoundAttachments,
+            columns: [
+                {
+                    template: "<input type='checkbox' class='checkbox' />",
+                    width: "40px",
                     attributes: {
                         style: "text-align: center;"
                     }
-				},{
-					field: "Image", title:"Imagen",
-					template: '#if(file_type == "Imagen") {#<img src="#:full_url#" width="60"/>#}#',
-					width: "80px"
-				},
-				{ field: "file_id", title: "Id", hidden: true },
-				{ field: "file_name", title: "Nombre" },
-				{ field: "file_url", title: "URL", hidden: true },
+                },{
+                    field: "Image", title:"Imagen",
+                    template: '#if(file_type == "Imagen") {#<img src="#:full_url#" width="60"/>#}#',
+                    width: "80px"
+                },
+                { field: "file_id", title: "Id", hidden: true },
+                { field: "file_name", title: "Nombre" },
+                { field: "file_url", title: "URL", hidden: true },
                 { field: "file_date", title: "Fecha", width: "150px", format: "{0:dd/MM/yyyy HH:mm}"},
-				{ field: "full_url", title: "URL" },
-				{ field: "file_type", title: "Tipo", width: "200px" },
-				{ field: "mail_bind", title: "Estado", width: "180px" }
-			]
-		}).data('kendoGrid');
+                { field: "full_url", title: "URL" },
+                { field: "file_type", title: "Tipo", width: "200px" },
+                { field: "mail_bind", title: "Estado", width: "180px" }
+            ]
+        }).data('kendoGrid');
 
         // Configuring events
-		grid.table.on("click", ".checkbox" , selectRowAttachment);
+        grid.table.on("click", ".checkbox" , selectRowAttachment);
 
-		//on click of the checkbox:
-		function selectRowAttachment() {
-			var checked = this.checked,
-				row = $(this).closest("tr"),
-				grid = $("#<?php echo $gridFilesName ?>").data("kendoGrid"),
-				dataItem = grid.dataItem(row);
+        //on click of the checkbox:
+        function selectRowAttachment() {
+            var checked = this.checked,
+                row = $(this).closest("tr"),
+                grid = $("#<?php echo $gridFilesName ?>").data("kendoGrid"),
+                dataItem = grid.dataItem(row);
 
-			viewModel.checkedIdsAttachment[dataItem.id] = checked;
-			if (checked) {
-				//-select the row
-				row.addClass("k-state-selected");
-			} else {
-				//-remove selection
-				row.removeClass("k-state-selected");
-			}
-		}
+            viewModel.checkedIdsAttachment[dataItem.id] = checked;
+            if (checked) {
+                //-select the row
+                row.addClass("k-state-selected");
+            } else {
+                //-remove selection
+                row.removeClass("k-state-selected");
+            }
+        }
 
-		//on dataBound event restore previous selected rows:
-		function onDataBoundAttachments() {
-			var view = this.dataSource.view();
-			for(var i = 0; i < view.length;i++){
-				if(viewModel.checkedIdsAttachment[view[i].id]){
-					this.tbody.find("tr[data-uid='" + view[i].uid + "']")
-						.addClass("k-state-selected")
-						.find(".checkbox")
-						.attr("checked","checked");
-				}
-			}
-		}
-	}
+        //on dataBound event restore previous selected rows:
+        function onDataBoundAttachments() {
+            var view = this.dataSource.view();
+            for(var i = 0; i < view.length;i++){
+                if(viewModel.checkedIdsAttachment[view[i].id]){
+                    this.tbody.find("tr[data-uid='" + view[i].uid + "']")
+                        .addClass("k-state-selected")
+                        .find(".checkbox")
+                        .attr("checked","checked");
+                }
+            }
+        }
+    }
 
-	function initGridPeople() {
-		// Init components
-	    var grid = $("#<?php echo $gridUsersName; ?>").kendoGrid({
-			dataSource: {
-				type: "odata",
-				transport: {
+    function initGridPeople() {
+        // Init components
+        var grid = $("#<?php echo $gridUsersName; ?>").kendoGrid({
+            dataSource: {
+                type: "odata",
+                transport: {
                     read: function (options) {
                         options.data.IdMail = viewModel.IdMail;
 
@@ -689,203 +689,167 @@ require_once("Application/Views/Shared/WindowImageBrowser.html");
                             }
                         });
                     }
-				},
-				schema: {
-					data: "rows",
-					total: "totalCount",
-					model: {
-						id: "user_id",
-						fields: {
-							user_id: { type: "number" },
-							user_name: { type: "string" },
-							user_mail: { type: "string" },
-							mail_sent_date: { type: "string" },
-							mail_sent_status: { type: "number" },
-							mail_status_text: { type: "string" }
-						}
-					}
-				},
-				error: function (e) {
-					e.preventDefault();
+                },
+                schema: {
+                    data: "rows",
+                    total: "totalCount",
+                    model: {
+                        id: "user_id",
+                        fields: {
+                            user_id: { type: "number" },
+                            user_name: { type: "string" },
+                            user_mail: { type: "string" },
+                            mail_sent_date: { type: "string" },
+                            mail_sent_status: { type: "number" },
+                            mail_status_text: { type: "string" }
+                        }
+                    }
+                },
+                error: function (e) {
+                    e.preventDefault();
                     if (e.errorThrown !== undefined) {
                         ShowError({message: e.errorThrown, title: "Server error"});
                     } else {
                         ShowError({message: "Cannot load users", title: "Server error"});
                     }
-				},
+                },
                 pageSize: 500,
-				serverPaging: false,
-				serverFiltering: false,
-				serverSorting: false,
-				sort: [
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false,
+                sort: [
                     { field: 'mail_sent_status', dir: 'asc' },
                     { field: 'user_mail', dir: 'asc' },
-				]
-			},
-	        height: 550,
-	        filterable: true,
-	        resizable: true,
-	        groupable: true,
-	        reorderable: true,
-	        sortable: {
-	            mode: "multiple",
-	            allowUnsort: true
-	        },
-	        pageable: {
-	            numeric: false,
-	            previousNext: false,
-	            refresh: true,
-	        },
-	        scrollable: {
-	            virtual: true
-	        },
-			//selectable: "multiple",
-			dataBound: onDataBoundPeople,
-			columns: [
-				{
-					template: "<input type='checkbox' class='checkbox' />",
-					headerTemplate: "<input type='checkbox' id='check-all' onclick='selectAllRowsPeople(this)'/>",
-					width: "40px",
+                ]
+            },
+            height: 550,
+            filterable: true,
+            resizable: true,
+            groupable: true,
+            reorderable: true,
+            sortable: {
+                mode: "multiple",
+                allowUnsort: true
+            },
+            pageable: {
+                numeric: false,
+                previousNext: false,
+                refresh: true,
+            },
+            scrollable: {
+                virtual: true
+            },
+            //selectable: "multiple",
+            dataBound: onDataBoundPeople,
+            columns: [
+                {
+                    template: "<input type='checkbox' class='checkbox' />",
+                    headerTemplate: "<input type='checkbox' id='check-all' onclick='selectAllRowsPeople(this)'/>",
+                    width: "40px",
                     attributes: {
                         style: "text-align: center;"
                     }
-				},
-				{ field: "user_id", title: "Id", hidden: true },
-				{ field: "user_name", title: "Nombre", width: "250px" },
-				{ field: "user_mail", title: "E-Mail" },
-				{ field: "mail_sent_date", title: "Fecha envío", width: "160px" },
-				{ field: "mail_sent_status", title: "Estado", hidden: true },
-				{ field: "mail_status_text", title: "Estado", width: "200px" }
-			]
-		}).data('kendoGrid');
+                },
+                { field: "user_id", title: "Id", hidden: true },
+                { field: "user_name", title: "Nombre", width: "250px" },
+                { field: "user_mail", title: "E-Mail" },
+                { field: "mail_sent_date", title: "Fecha envío", width: "160px" },
+                { field: "mail_sent_status", title: "Estado", hidden: true },
+                { field: "mail_status_text", title: "Estado", width: "200px" }
+            ]
+        }).data('kendoGrid');
 
         // Configuring events
-		grid.table.on("click", ".checkbox" , selectRowPeople);
+        grid.table.on("click", ".checkbox" , selectRowPeople);
 
-		//on click of the checkbox:
-		function selectRowPeople() {
-			var checked = this.checked,
-				row = $(this).closest("tr"),
-				grid = $("#<?php echo $gridUsersName; ?>").data("kendoGrid"),
-				dataItem = grid.dataItem(row);
+        //on click of the checkbox:
+        function selectRowPeople() {
+            var checked = this.checked,
+                row = $(this).closest("tr"),
+                grid = $("#<?php echo $gridUsersName; ?>").data("kendoGrid"),
+                dataItem = grid.dataItem(row);
 
             viewModel.checkedIdsPeople[dataItem.id] = checked;
-			if (checked) {
-				//-select the row
-				row.addClass("k-state-selected");
-			} else {
-				//-remove selection
-				row.removeClass("k-state-selected");
-			}
-		}
+            if (checked) {
+                //-select the row
+                row.addClass("k-state-selected");
+            } else {
+                //-remove selection
+                row.removeClass("k-state-selected");
+            }
+        }
 
-		//on dataBound event restore previous selected rows:
-		function onDataBoundPeople() {
-			var view = this.dataSource.view();
-			for(var i = 0; i < view.length;i++){
-				if(viewModel.checkedIdsPeople[view[i].id]){
-					this.tbody.find("tr[data-uid='" + view[i].uid + "']")
-						.addClass("k-state-selected")
-						.find(".checkbox")
-						.attr("checked","checked");
-				}
-			}
-		}
-	}
+        //on dataBound event restore previous selected rows:
+        function onDataBoundPeople() {
+            var view = this.dataSource.view();
+            for(var i = 0; i < view.length;i++){
+                if(viewModel.checkedIdsPeople[view[i].id]){
+                    this.tbody.find("tr[data-uid='" + view[i].uid + "']")
+                        .addClass("k-state-selected")
+                        .find(".checkbox")
+                        .attr("checked","checked");
+                }
+            }
+        }
+    }
 
-	//on click of the check-all:
-	function selectAllRowsPeople(ele) {
-		var state = $(ele).is(':checked');
-		var grid = $('#<?php echo $gridUsersName; ?>').data('kendoGrid');
-		$.each(grid.dataSource.view(), function () {
+    //on click of the check-all:
+    function selectAllRowsPeople(ele) {
+        var state = $(ele).is(':checked');
+        var grid = $('#<?php echo $gridUsersName; ?>').data('kendoGrid');
+        $.each(grid.dataSource.view(), function () {
             viewModel.checkedIdsPeople[this.id] = state;
-		});
-		if (state) {
-			grid.select(grid.tbody.find(">tr"));
-			$(".checkbox").prop('checked', true);
-		} else {
-			grid.clearSelection();
-			$(".checkbox").prop('checked', false);
-		}
-	}
+        });
+        if (state) {
+            grid.select(grid.tbody.find(">tr"));
+            $(".checkbox").prop('checked', true);
+        } else {
+            grid.clearSelection();
+            $(".checkbox").prop('checked', false);
+        }
+    }
 
 </script>
 
 <!-- Inicializacion pantalla -->
 <script type="text/javascript">
-	/* ################# ON DOCUMENT READY ################# */
-	$(document).ready(function() {
+    /* ################# ON DOCUMENT READY ################# */
+    $(document).ready(function() {
         // Init data
         viewModel.Initialize();
 
-		// Init vars
-		var toolsVar = [
-			"bold", "italic", "underline", "strikethrough", "justifyLeft", "justifyCenter",
-			"justifyRight", "justifyFull", "insertUnorderedList", "insertOrderedList",
-			"indent", "outdent", "createLink", "unlink", "insertImage", "insertFile",
-			"subscript", "superscript", "createTable", "addRowAbove", "addRowBelow",
-			"addColumnLeft", "addColumnRight", "deleteRow", "deleteColumn", "viewHtml",
-			"formatting", "cleanFormatting", "fontName", "fontSize", "foreColor", "backColor",
-			{
-				name: "person",
-				tooltip: "Inserta un campo persona",
-				template: "<a href='' role='button' class='k-tool k-group-start' title='Persona'>" +
-							"<img src='" + PathImages + "ui/btnUser.png' /></a>",
-				exec: function(e) {
-					var editor = $(this).data("kendoEditor");
-					editor.exec("inserthtml", { value: "{DisplayUser}" });
-				}
-			}
-		];
+        // Init vars
+        var toolsVar = [
+            "bold", "italic", "underline", "strikethrough", "justifyLeft", "justifyCenter",
+            "justifyRight", "justifyFull", "insertUnorderedList", "insertOrderedList",
+            "indent", "outdent", "createLink", "unlink", "insertImage", "insertFile",
+            "subscript", "superscript", "createTable", "addRowAbove", "addRowBelow",
+            "addColumnLeft", "addColumnRight", "deleteRow", "deleteColumn", "viewHtml",
+            "formatting", "cleanFormatting", "fontName", "fontSize", "foreColor", "backColor",
+            {
+                name: "person",
+                tooltip: "Inserta un campo persona",
+                template: "<a href='' role='button' class='k-tool k-group-start' title='Persona'>" +
+                            "<img src='" + PathImages + "ui/btnUser.png' /></a>",
+                exec: function(e) {
+                    var editor = $(this).data("kendoEditor");
+                    editor.exec("inserthtml", { value: "{DisplayUser}" });
+                }
+            }
+        ];
 
         // Init gui
-		$("#tabstrip").kendoTabStrip({
-			animation:  {
-				open: {
-					effects: "fadeIn"
-				}
-			}
-		});
+        $("#tabstrip").kendoTabStrip({
+            animation:  {
+                open: {
+                    effects: "fadeIn"
+                }
+            }
+        });
 
-		// Init gui editors
-		$('#header_for_new').kendoEditor({
-			tools: toolsVar,
-			imageBrowser: {
-                path: PathImages,
-				transport: {
-                    read: function(options) {
-                        $.ajax({
-                            url: "<?php echo StringUtil::UrlAction($mailImageReadAction, $controllerName, $areaName); ?>",
-                            type: "POST",
-                            dataType: "json",
-                            contentType: "application/json",
-                            data: kendo.stringify({IdMail: viewModel.IdMail}),
-                            success: function (response) {
-                                if (response.success) {
-                                    options.success(response.data.rows);
-                                } else {
-                                    AlertBox(response.message, "Warning", MessageBoxDialogs.ErrorIcon);
-                                    // Prevent default error
-                                    options.success([]);
-                                }
-                            },
-                            error: function (response) {
-                                AlertBox("Unknown error. Please, contact with the webmaster.", "Error", MessageBoxDialogs.ErrorIcon);
-                                console.log(response);
-                                // Prevent default error
-                                options.success([]);
-                            }
-                        });
-                    },
-				    thumbnailUrl: "<?php echo $mailImageThumbnail; ?>",
-				    imageUrl: function (path, name) {
-				        return "<?php echo Constants::GetMailImagesPath(); ?>" + "/" + path;
-				    }
-				}
-			}
-		});
-		$('#header_for_old').kendoEditor({
-			tools: toolsVar,
+        // Init gui editors
+        $('#header_for_new').kendoEditor({
+            tools: toolsVar,
             imageBrowser: {
                 path: PathImages,
                 transport: {
@@ -919,9 +883,9 @@ require_once("Application/Views/Shared/WindowImageBrowser.html");
                     }
                 }
             }
-		});
-		$('#body_message').kendoEditor({
-			tools: toolsVar,
+        });
+        $('#header_for_old').kendoEditor({
+            tools: toolsVar,
             imageBrowser: {
                 path: PathImages,
                 transport: {
@@ -955,38 +919,74 @@ require_once("Application/Views/Shared/WindowImageBrowser.html");
                     }
                 }
             }
-		});
-		$("#date_send").kendoDatePicker({
+        });
+        $('#body_message').kendoEditor({
+            tools: toolsVar,
+            imageBrowser: {
+                path: PathImages,
+                transport: {
+                    read: function(options) {
+                        $.ajax({
+                            url: "<?php echo StringUtil::UrlAction($mailImageReadAction, $controllerName, $areaName); ?>",
+                            type: "POST",
+                            dataType: "json",
+                            contentType: "application/json",
+                            data: kendo.stringify({IdMail: viewModel.IdMail}),
+                            success: function (response) {
+                                if (response.success) {
+                                    options.success(response.data.rows);
+                                } else {
+                                    AlertBox(response.message, "Warning", MessageBoxDialogs.ErrorIcon);
+                                    // Prevent default error
+                                    options.success([]);
+                                }
+                            },
+                            error: function (response) {
+                                AlertBox("Unknown error. Please, contact with the webmaster.", "Error", MessageBoxDialogs.ErrorIcon);
+                                console.log(response);
+                                // Prevent default error
+                                options.success([]);
+                            }
+                        });
+                    },
+                    thumbnailUrl: "<?php echo $mailImageThumbnail; ?>",
+                    imageUrl: function (path, name) {
+                        return "<?php echo Constants::GetMailImagesPath(); ?>" + "/" + path;
+                    }
+                }
+            }
+        });
+        $("#date_send").kendoDatePicker({
             format: "dd/MM/yyyy",
             parseFormats: ["dd/MM/yyyy"]
         });
-		// Init buttons
-		$("#btnSave").kendoButton();
-		$("#btnCancel").kendoButton();
-		$("#btnBindFile").kendoButton();
-		$("#btnUnbindFile").kendoButton();
-		$("#btnSend").kendoButton();
-		$("#btnResend").kendoButton();
+        // Init buttons
+        $("#btnSave").kendoButton();
+        $("#btnCancel").kendoButton();
+        $("#btnBindFile").kendoButton();
+        $("#btnUnbindFile").kendoButton();
+        $("#btnSend").kendoButton();
+        $("#btnResend").kendoButton();
 
-		$("#panelbar").kendoPanelBar({
+        $("#panelbar").kendoPanelBar({
             expandMode: "single",
-		});
+        });
 
         // Binding
         kendo.bind($("#dialog-new-mail"), viewModel);
-		initGridAttachments();
-		initGridPeople();
+        initGridAttachments();
+        initGridPeople();
 
-		$(window).resize(function () {
-		    resizeGrid("<?php echo "#".$gridFilesName; ?>", 200);
-		    resizeGrid("<?php echo "#".$gridUsersName; ?>", 200);
-		});
+        $(window).resize(function () {
+            resizeGrid("<?php echo "#".$gridFilesName; ?>", 200);
+            resizeGrid("<?php echo "#".$gridUsersName; ?>", 200);
+        });
 
-	    setTimeout(function () {
-	        resizeGrid("<?php echo "#".$gridFilesName; ?>", 200);
-	    }, 100);
-	    setTimeout(function () {
-	        resizeGrid("<?php echo "#".$gridUsersName; ?>", 200);
-	    }, 100);
-	});
+        setTimeout(function () {
+            resizeGrid("<?php echo "#".$gridFilesName; ?>", 200);
+        }, 100);
+        setTimeout(function () {
+            resizeGrid("<?php echo "#".$gridUsersName; ?>", 200);
+        }, 100);
+    });
 </script>

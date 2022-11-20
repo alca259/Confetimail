@@ -110,13 +110,13 @@ require_once('Application/Views/Shared/WindowNotification.html');
             }
         });
 
-	    var dataAdapterModels = new kendo.data.HierarchicalDataSource({
-	        transport: {
-	            read: function (options) {
-	                var dataToSend = options.data;
+        var dataAdapterModels = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: function (options) {
+                    var dataToSend = options.data;
 
-	                $.ajax({
-	                    url: "<?php echo StringUtil::UrlAction($permissionsReadAction, $controllerName, $areaName); ?>",
+                    $.ajax({
+                        url: "<?php echo StringUtil::UrlAction($permissionsReadAction, $controllerName, $areaName); ?>",
                         dataType: "json",
                         type: "POST",
                         data: kendo.stringify(dataToSend),
@@ -149,97 +149,97 @@ require_once('Application/Views/Shared/WindowNotification.html');
             }
         });
 
-	    var dataAdapterGeneralModels = new kendo.data.HierarchicalDataSource({
-	        transport: {
-	            read: function (options) {
-	                $.ajax({
-	                    url: "<?php echo StringUtil::UrlAction($permissionsGeneralReadAction, $controllerName, $areaName); ?>",
-	                    dataType: "json",
-	                    type: "POST",
-	                    contentType: "application/json",
-	                    success: function (response) {
-	                        if (response.success) {
-	                            options.success(response.data);
-	                        } else {
-	                            AlertBox(response.message, "Warning", MessageBoxDialogs.ErrorIcon);
-	                            // Prevent default error
-	                            options.success([]);
-	                        }
-	                    },
-	                    error: function (response) {
-	                        AlertBox("Unknown error. Please, contact with the webmaster.", "Error", MessageBoxDialogs.ErrorIcon);
-	                        console.log(response);
-	                        // Prevent default error
-	                        options.success([]);
-	                    }
-	                });
-	            }
-	        },
-	        schema: {
-	            model: {
-	                id: "id",
-	                text: "text",
-	                children: "items"
-	            }
-	        }
-	    });
+        var dataAdapterGeneralModels = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        url: "<?php echo StringUtil::UrlAction($permissionsGeneralReadAction, $controllerName, $areaName); ?>",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json",
+                        success: function (response) {
+                            if (response.success) {
+                                options.success(response.data);
+                            } else {
+                                AlertBox(response.message, "Warning", MessageBoxDialogs.ErrorIcon);
+                                // Prevent default error
+                                options.success([]);
+                            }
+                        },
+                        error: function (response) {
+                            AlertBox("Unknown error. Please, contact with the webmaster.", "Error", MessageBoxDialogs.ErrorIcon);
+                            console.log(response);
+                            // Prevent default error
+                            options.success([]);
+                        }
+                    });
+                }
+            },
+            schema: {
+                model: {
+                    id: "id",
+                    text: "text",
+                    children: "items"
+                }
+            }
+        });
 
-	    // Creamos los arboles de kendo
-	    $("#<?php echo $treeName; ?>").kendoTreeView({
-	        checkboxes: {
-	            checkChildren: true
-	        },
-	        dataSource: dataAdapterModels
-	    });
+        // Creamos los arboles de kendo
+        $("#<?php echo $treeName; ?>").kendoTreeView({
+            checkboxes: {
+                checkChildren: true
+            },
+            dataSource: dataAdapterModels
+        });
 
-	    $("#<?php echo $treeNameGeneral; ?>").kendoTreeView({
-	        checkboxes: {
-	            checkChildren: true
-	        },
-	        dataSource: dataAdapterGeneralModels
-	    });
+        $("#<?php echo $treeNameGeneral; ?>").kendoTreeView({
+            checkboxes: {
+                checkChildren: true
+            },
+            dataSource: dataAdapterGeneralModels
+        });
 
-	    // Creamos los botones
-	    $("#btnSave").kendoButton({
-	        click: saveChanges,
-	        icon: "tick"
-	    });
+        // Creamos los botones
+        $("#btnSave").kendoButton({
+            click: saveChanges,
+            icon: "tick"
+        });
 
-	    $("#btnSaveGeneral").kendoButton({
-	        click: saveChangesGeneral,
-	        icon: "tick"
-	    });
+        $("#btnSaveGeneral").kendoButton({
+            click: saveChangesGeneral,
+            icon: "tick"
+        });
 
-	    // Cargamos el combo
-	    $("#<?php echo $comboUserName; ?>").width(400).kendoComboBox({
-	        dataTextField: "UserName",
-	        dataValueField: "UserId",
-	        dataSource: dataAdapterUsers,
-	        height: 370,
-	        filter: "contains",
-	        suggest: true,
-	        change: onChangeUser
-	    });
+        // Cargamos el combo
+        $("#<?php echo $comboUserName; ?>").width(400).kendoComboBox({
+            dataTextField: "UserName",
+            dataValueField: "UserId",
+            dataSource: dataAdapterUsers,
+            height: 370,
+            filter: "contains",
+            suggest: true,
+            change: onChangeUser
+        });
 
-	    // Cargamos las pestañas
-	    $("#tabstrip").kendoTabStrip({
-	        animation: {
-	            open: {
-	                effects: "fadeIn"
-	            }
-	        }
-	    });
+        // Cargamos las pestañas
+        $("#tabstrip").kendoTabStrip({
+            animation: {
+                open: {
+                    effects: "fadeIn"
+                }
+            }
+        });
 
-	    function onChangeUser(e) {
-	        if (this.selectedIndex >= 0) {
-	            var dataItem = this.dataItem(this.selectedIndex);
-	            $("#<?php echo $treeName; ?>").data("kendoTreeView").dataSource.read({ UserId: dataItem.UserId });
+        function onChangeUser(e) {
+            if (this.selectedIndex >= 0) {
+                var dataItem = this.dataItem(this.selectedIndex);
+                $("#<?php echo $treeName; ?>").data("kendoTreeView").dataSource.read({ UserId: dataItem.UserId });
                 $("#arbol").show();
             } else {
                 $("#arbol").hide();
             }
         }
-	});
+    });
 
     function saveChanges() {
         // Obtenemos los checks del arbol seleccionados

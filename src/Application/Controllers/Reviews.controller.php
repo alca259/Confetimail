@@ -2,31 +2,31 @@
 
 class ReviewsController extends BaseController
 {
-	#region Variables privadas
+    #region Variables privadas
     private $controllerName;
     #endregion
 
     #region Constructors
-	public function __construct()
+    public function __construct()
     {
-		// Llamamos al constructor padre
-		parent::__construct();
+        // Llamamos al constructor padre
+        parent::__construct();
         $this->controllerName = str_replace("Controller", "", __CLASS__);
-	}
+    }
     #endregion
 
-	#region Controller actions
+    #region Controller actions
     /**
      * Carga la pantalla principal
      * @author alca259
      * @version OK
      */
-	public function Index()
+    public function Index()
     {
         $this->ViewBag->CurrentMenu = "Reviews";
-		$this->ViewBag->Title = T_("Reviews");
+        $this->ViewBag->Title = T_("Reviews");
         return new View(__FUNCTION__, $this->controllerName, $this->ViewBag);
-	}
+    }
     #endregion
     
     #region Ajax actions
@@ -35,13 +35,13 @@ class ReviewsController extends BaseController
      * @author alca259
      * @version OK
      */
-	public function Reviews_Read()
+    public function Reviews_Read()
     {
         $result = array("success" => false, "data" => array(), "message" => "");
         
         try
         {
-		    $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
+            $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
             
             if ($ajaxCall != 1)
             {
@@ -50,10 +50,10 @@ class ReviewsController extends BaseController
             
             $request = file_get_contents('php://input');
 
-		    if ($request)
+            if ($request)
             {
-			    $json_data = JsonHandler::NormalDecode($request, true);
-		    }
+                $json_data = JsonHandler::NormalDecode($request, true);
+            }
             
             if (!isset($json_data)
                 || !isset($json_data["SelectedPage"])
@@ -123,20 +123,20 @@ class ReviewsController extends BaseController
         }
         
         echo JsonHandler::Encode($result);
-	}
+    }
     
     /**
      * Crea una nueva opinion en el sistema
      * @author alca259
      * @version OK
      */
-	public function Review_Create()
+    public function Review_Create()
     {
         $result = array("success" => false, "data" => array(), "message" => "");
         
         try
         {
-		    $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
+            $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
             
             if ($ajaxCall != 1)
             {
@@ -145,10 +145,10 @@ class ReviewsController extends BaseController
             
             $request = file_get_contents('php://input');
 
-		    if ($request)
+            if ($request)
             {
-			    $json_data = JsonHandler::NormalDecode($request, true);
-		    }
+                $json_data = JsonHandler::NormalDecode($request, true);
+            }
             
             if (!isset($json_data)
                 || !isset($json_data["Comment"])
@@ -159,11 +159,11 @@ class ReviewsController extends BaseController
 
             // Guardamos los datos
             $data = array(
-				'user_id' => $_SESSION['GUID'],
-				'comments' => nl2br($json_data["Comment"]),
-				'date_published' => date("Y-m-d H:i:s"),
-				'score' => $json_data["Score"]
-			);
+                'user_id' => $_SESSION['GUID'],
+                'comments' => nl2br($json_data["Comment"]),
+                'date_published' => date("Y-m-d H:i:s"),
+                'score' => $json_data["Score"]
+            );
             
             $this->reviewPostModel->Create($_SESSION['GUID'], $data);
             
@@ -181,7 +181,7 @@ class ReviewsController extends BaseController
         }
         
         echo JsonHandler::Encode($result);
-	}
+    }
     #endregion
     
     #region Private methods

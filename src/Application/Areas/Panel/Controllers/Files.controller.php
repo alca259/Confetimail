@@ -5,7 +5,7 @@ set_time_limit(300);
 
 class FilesController extends BaseController
 {
-	#region Variables privadas
+    #region Variables privadas
     private $controllerName;
     private $uploadFilesUrl = '';
     private $uploadFilesRelativeUrl = '';
@@ -14,33 +14,33 @@ class FilesController extends BaseController
     #endregion
 
     #region Constructor
-	public function __construct()
+    public function __construct()
     {
-		// Llamamos al constructor padre
-		parent::__construct();
+        // Llamamos al constructor padre
+        parent::__construct();
         $this->controllerName = str_replace("Controller", "", __CLASS__);
         
         $this->uploadFilesUrl = Constants::$UploadFilesUrl;
         $this->uploadFilesRelativeUrl = Constants::$UploadFilesRelativeUrl;
         $this->uploadImagesUrl = Constants::$UploadImagesUrl;
         $this->uploadImagesRelativeUrl = Constants::$UploadImagesRelativeUrl;
-	}
+    }
     #endregion
 
-	#region Action controllers
-	public function Index()
+    #region Action controllers
+    public function Index()
     {
         if (Security::IsAuthorizedAdmin())
         {
             $this->ViewBag->CurrentMenu = "Files";
             $this->ViewBag->Title = "Ficheros";
             return new View(__FUNCTION__, $this->controllerName, $this->ViewBag, Constants::$PanelAreaName, true);
-		}
+        }
         else
         {
             return parent::RedirectToAction("401");
-		}
-	}
+        }
+    }
     
     public function NewFile()
     {
@@ -99,64 +99,64 @@ class FilesController extends BaseController
     }
     #endregion
 
-	#region Action Ajax
+    #region Action Ajax
     /**
      * Función que devuelve los ficheros cargados en el servidor
      */
-	public function Files_Read()
+    public function Files_Read()
     {
         $result = array("success" => false, "data" => array(), "message" => "");
 
         try
         {
-		    $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
+            $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
 
             if (!Security::IsAuthorizedAdmin() || $ajaxCall != 1)
             {
                 throw new Exception("Unathorized access");
             }
 
-			// Vars
-			$valid_files = array();
+            // Vars
+            $valid_files = array();
             
             $result["data"] = array(
-				"rows" => array(),
-				"totalCount" => 0
-			);
+                "rows" => array(),
+                "totalCount" => 0
+            );
 
-			// Realizamos la busqueda
-			$sFiles = $this->fileModel->Search($_SESSION['GUID'], array());
+            // Realizamos la busqueda
+            $sFiles = $this->fileModel->Search($_SESSION['GUID'], array());
 
-			// Obtencion de datos
-			if (!empty($sFiles))
+            // Obtencion de datos
+            if (!empty($sFiles))
             {
-				$valid_files = $this->fileModel->BrowseRecord($_SESSION['GUID'], $sFiles, "name ASC");
-			}
+                $valid_files = $this->fileModel->BrowseRecord($_SESSION['GUID'], $sFiles, "name ASC");
+            }
 
-			// Recorremos todos los ficheros validos
-			foreach ($valid_files as $file)
+            // Recorremos todos los ficheros validos
+            foreach ($valid_files as $file)
             {
-				$fecha_modif = $file->data['create_date'];
+                $fecha_modif = $file->data['create_date'];
 
-				if (strtotime($file->data['write_date']) > 0)
+                if (strtotime($file->data['write_date']) > 0)
                 {
-					$fecha_modif = $file->data['write_date'];
-				}
+                    $fecha_modif = $file->data['write_date'];
+                }
 
-				$itemData = array(
-					"file_id" => $file->data['id'],
-					"file_name" => utf8_encode($file->data['name']),
-					"file_url" => utf8_encode($file->data['file_url']),
-					"full_url" => utf8_encode("/".substr($file->data['full_url'], 2)),
-					"file_type" => utf8_encode($file->columns['file_type']->GetObjectSelected($file->data['file_type'])),
-					"file_date" => str_replace('-', '/', date("d-m-Y H:i", strtotime($fecha_modif))),
-					"file_category" => utf8_encode($file->columns['file_category']->GetObjectSelected($file->data['file_category'])),
-					"file_active" => $file->data['active'] == 1 ? true : false
-				);
+                $itemData = array(
+                    "file_id" => $file->data['id'],
+                    "file_name" => utf8_encode($file->data['name']),
+                    "file_url" => utf8_encode($file->data['file_url']),
+                    "full_url" => utf8_encode("/".substr($file->data['full_url'], 2)),
+                    "file_type" => utf8_encode($file->columns['file_type']->GetObjectSelected($file->data['file_type'])),
+                    "file_date" => str_replace('-', '/', date("d-m-Y H:i", strtotime($fecha_modif))),
+                    "file_category" => utf8_encode($file->columns['file_category']->GetObjectSelected($file->data['file_category'])),
+                    "file_active" => $file->data['active'] == 1 ? true : false
+                );
 
-				$result["data"]["rows"][] = $itemData;
-				$result["data"]["totalCount"]++;
-			}
+                $result["data"]["rows"][] = $itemData;
+                $result["data"]["totalCount"]++;
+            }
             
             $result["success"] = true;
         }
@@ -172,24 +172,24 @@ class FilesController extends BaseController
         }
         
         echo JsonHandler::Encode($result);
-	}
+    }
     
-	/**
+    /**
      * Función que modifica la información del fichero subido
      */
-	public function UpdateFile()
+    public function UpdateFile()
     {
         $result = array("success" => false, "data" => array(), "message" => "");
         
         try
         {
-		    $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
-		    $request = file_get_contents('php://input');
+            $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
+            $request = file_get_contents('php://input');
 
-		    if ($request)
+            if ($request)
             {
-			    $json_data = JsonHandler::NormalDecode($request, true);
-		    }
+                $json_data = JsonHandler::NormalDecode($request, true);
+            }
 
             if (!Security::IsAuthorizedAdmin() || $ajaxCall != 1)
             {
@@ -203,9 +203,9 @@ class FilesController extends BaseController
                 throw new Exception("No data found");
             }
 
-			$ItemData = array(
-				'active' => $json_data["file_active"],
-			);
+            $ItemData = array(
+                'active' => $json_data["file_active"],
+            );
 
             // Buscamos el original
             $sFile = $this->fileModel->Search($_SESSION['GUID'], array(array("id", "=", $json_data["file_id"])));
@@ -314,24 +314,24 @@ class FilesController extends BaseController
         }
         
         echo JsonHandler::Encode($result);
-	}
+    }
 
-	/**
+    /**
      * Función que elimina los ficheros fisicos y de base de datos
      */
-	public function RemoveFile()
-	{
+    public function RemoveFile()
+    {
         $result = array("success" => false, "data" => array(), "message" => "");
         
         try
         {
-		    $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
-		    $request = file_get_contents('php://input');
+            $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
+            $request = file_get_contents('php://input');
 
-		    if ($request)
+            if ($request)
             {
-			    $json_data = JsonHandler::NormalDecode($request, true);
-		    }
+                $json_data = JsonHandler::NormalDecode($request, true);
+            }
             
             if (!Security::IsAuthorizedAdmin() || $ajaxCall != 1)
             {
@@ -344,25 +344,25 @@ class FilesController extends BaseController
                 throw new Exception("No data found");
             }
 
-			// Obtenemos los datos
-			$FilesId = $json_data['FilesId'];
+            // Obtenemos los datos
+            $FilesId = $json_data['FilesId'];
 
-			foreach ($FilesId as $FileId)
+            foreach ($FilesId as $FileId)
             {
-				// Obtenemos la linea
-				$bData = $this->fileModel->Browse($_SESSION['GUID'], array($FileId));
+                // Obtenemos la linea
+                $bData = $this->fileModel->Browse($_SESSION['GUID'], array($FileId));
 
-				if (count($bData) == 1)
+                if (count($bData) == 1)
                 {
-					// Borramos el fichero
-					if (file_exists($bData[0]['full_url']))
+                    // Borramos el fichero
+                    if (file_exists($bData[0]['full_url']))
                     {
                         unlink($bData[0]['full_url']);
                     }
-					// Borramos los datos
-					$this->fileModel->Unlink($_SESSION['GUID'], array($FileId));
-				}
-			}
+                    // Borramos los datos
+                    $this->fileModel->Unlink($_SESSION['GUID'], array($FileId));
+                }
+            }
             
             $result["success"] = true;
         }
@@ -378,7 +378,7 @@ class FilesController extends BaseController
         }
         
         echo JsonHandler::Encode($result);
-	}
+    }
 
     /**
      * Busca ficheros en el servidor que no esten registrados ya
@@ -495,36 +495,36 @@ class FilesController extends BaseController
         }
         
         echo JsonHandler::Encode($result);
-	}
+    }
 
 
-	/**
+    /**
      * Función que devuelve las categorias de los archivos
      */
-	public function GetComboboxCategoryFiles()
-	{
+    public function GetComboboxCategoryFiles()
+    {
         $result = array("success" => false, "data" => array(), "message" => "");
         
         try
         {
-		    $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
+            $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
 
             if (!Security::IsAuthorizedAdmin() || $ajaxCall != 1)
             {
                 throw new Exception("Unathorized user");
             }
 
-			$fileTypes = $this->fileModel->columns['file_category']->GetObjects();
+            $fileTypes = $this->fileModel->columns['file_category']->GetObjects();
 
-			foreach ($fileTypes as $key => $value)
+            foreach ($fileTypes as $key => $value)
             {
-				$itemData = array(
-					"category_id" => utf8_encode($key),
-					"category_name" => utf8_encode($value),
-				);
+                $itemData = array(
+                    "category_id" => utf8_encode($key),
+                    "category_name" => utf8_encode($value),
+                );
 
-				$result["data"][] = $itemData;
-			}
+                $result["data"][] = $itemData;
+            }
 
             $result["success"] = true;
         }
@@ -540,13 +540,13 @@ class FilesController extends BaseController
         }
         
         echo JsonHandler::Encode($result);
-	}
+    }
 
-	/**
+    /**
      * Función que devuelve los tipos de archivos
      */
-	public function GetComboboxFileTypes()
-	{
+    public function GetComboboxFileTypes()
+    {
         $result = array("success" => false, "data" => array(), "message" => "");
         
         try 
@@ -558,17 +558,17 @@ class FilesController extends BaseController
                 throw new Exception("Unathorized user");
             }
             
-			$fileTypes = $this->fileModel->columns['file_type']->GetObjects();
+            $fileTypes = $this->fileModel->columns['file_type']->GetObjects();
 
-			foreach ($fileTypes as $key => $value)
+            foreach ($fileTypes as $key => $value)
             {
-				$itemData = array(
-					"type_id" => utf8_encode($key),
-					"type_name" => utf8_encode($value),
-				);
+                $itemData = array(
+                    "type_id" => utf8_encode($key),
+                    "type_name" => utf8_encode($value),
+                );
 
-				$result["data"][] = $itemData;
-			}
+                $result["data"][] = $itemData;
+            }
 
             $result["success"] = true;
         }
@@ -584,7 +584,7 @@ class FilesController extends BaseController
         }
         
         echo JsonHandler::Encode($result);
-	}
+    }
     #endregion
     
     #region Private methods
@@ -592,7 +592,7 @@ class FilesController extends BaseController
      * Función que sube un fichero al servidor y lo registra en la base de datos
      * Además realiza una validación de tipo y tamaño
      */
-	private function UploadFile($itemInfo)
+    private function UploadFile($itemInfo)
     {
         $UploadDirectory = "";
         $NewFileName = "";
@@ -601,80 +601,80 @@ class FilesController extends BaseController
         
         try 
         {           
-		    #region ########### Getting vars ###########
-		    $FileName = $itemInfo['FileName'];
-		    $FileType = $itemInfo['FileType'];
-		    $FileCategory = $itemInfo['FileCategory'];
-		    $FileActive = $itemInfo['FileActive'] == "on" || $itemInfo['FileActive'] == "true" ? true : false;
-		    $UploadDirectory = "";
-		    $RelativeURL = "";
+            #region ########### Getting vars ###########
+            $FileName = $itemInfo['FileName'];
+            $FileType = $itemInfo['FileType'];
+            $FileCategory = $itemInfo['FileCategory'];
+            $FileActive = $itemInfo['FileActive'] == "on" || $itemInfo['FileActive'] == "true" ? true : false;
+            $UploadDirectory = "";
+            $RelativeURL = "";
             $files = $itemInfo["Files"];
             $counterFiles = is_array($files["name"]) ? count($files["name"]) : 1;
-		    #endregion
+            #endregion
 
-		    #region ########### Directory settings ###########
-		    switch($FileType)
+            #region ########### Directory settings ###########
+            switch($FileType)
             {
-			    case "image":
-				    $UploadDirectory = $this->uploadImagesUrl; //specify upload directory ends with / (slash)
-				    $RelativeURL = $this->uploadImagesRelativeUrl;
-				    break;
-			    case "zip":
-			    case "pdf":
-			    case "other":
-				    $UploadDirectory = $this->uploadFilesUrl; //specify upload directory ends with / (slash)
-				    $RelativeURL = $this->uploadFilesRelativeUrl;
-				    break;
-			    default:
+                case "image":
+                    $UploadDirectory = $this->uploadImagesUrl; //specify upload directory ends with / (slash)
+                    $RelativeURL = $this->uploadImagesRelativeUrl;
+                    break;
+                case "zip":
+                case "pdf":
+                case "other":
+                    $UploadDirectory = $this->uploadFilesUrl; //specify upload directory ends with / (slash)
+                    $RelativeURL = $this->uploadFilesRelativeUrl;
+                    break;
+                default:
                     throw new Exception("Not allowed to upload");
-		    }
+            }
 
-		    if (!file_exists($UploadDirectory))
+            if (!file_exists($UploadDirectory))
             {
-			    mkdir($UploadDirectory, 0755, true);
-		    }
-		    #endregion
+                mkdir($UploadDirectory, 0755, true);
+            }
+            #endregion
 
             for ($i = 0; $i < $counterFiles; $i++)
             {
-		        #region ########### Server Validation ###########
-		        // Is file size is less than allowed size.
-		        if ($files["size"][$i] > 134217728) // 128MB
+                #region ########### Server Validation ###########
+                // Is file size is less than allowed size.
+                if ($files["size"][$i] > 134217728) // 128MB
                 {
                     throw new Exception("File size is too big (".($files["size"][$i]/1048576)."MB)");
-		        }
+                }
 
-		        $fType = $files['type'][$i];
-		        if ($fType == "" || $fType == "application/octet-stream")
+                $fType = $files['type'][$i];
+                if ($fType == "" || $fType == "application/octet-stream")
                 {
-			        $fName = $files['name'][$i];
-			        $fType = strlen($fName) > 4 ? "ext/".substr($fName, strlen($fName) - 4) : "";
-		        }
+                    $fName = $files['name'][$i];
+                    $fType = strlen($fName) > 4 ? "ext/".substr($fName, strlen($fName) - 4) : "";
+                }
 
-		        // Allowed file type Server side check
-		        switch(strtolower($fType))
-		        {
-			        //allowed file types
-			        case 'image/png':
-			        case 'image/gif':
-			        case 'image/jpeg':
-			        case 'image/pjpeg':
-			        case 'text/plain':
-			        case 'text/html': //html file
-			        case 'application/x-zip-compressed':
-			        case 'application/zip':
-			        case 'ext/.zip':
+                // Allowed file type Server side check
+                switch(strtolower($fType))
+                {
+                    //allowed file types
+                    case 'image/png':
+                    case 'image/gif':
+                    case 'image/jpeg':
+                    case 'image/pjpeg':
+                    case 'text/plain':
+                    case 'text/html': //html file
+                    case 'application/x-zip-compressed':
+                    case 'application/zip':
+                    case 'ext/.zip':
                     case 'ext/zip':
-			        case 'application/pdf':
-			        case 'application/msword':
-			        case 'application/vnd.ms-excel':
-			        case 'video/mp4':
-				        break;
-			        default:
-				        // Unsupported File!
-				        throw new Exception("Extension not allowed (".$files["type"][$i].")");
-		        }
-		        #endregion
+                    case 'application/pdf':
+                    case 'application/msword':
+                    case 'application/vnd.ms-excel':
+                    case 'video/mp4':
+                        break;
+                    default:
+                        // Unsupported File!
+                        throw new Exception("Extension not allowed (".$files["type"][$i].")");
+                }
+                #endregion
 
                 #region ########### Upload file ###########
                 // No hay errores
@@ -725,6 +725,6 @@ class FilesController extends BaseController
         }
 
         return $result;
-	}
+    }
     #endregion
 }

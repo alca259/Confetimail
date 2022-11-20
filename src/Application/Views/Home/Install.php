@@ -50,15 +50,15 @@
                 if (!$ViewBag->Done)
                 {
                     echo sprintf('
-					<form action="" method="post" accept-charset="UTF-8">
-						<div class="form-item">
-							<label for="confirm">%s</label>
-							<input type="password" id="confirm" name="confirm" value="" class="form-text" />
-							<div class="description">%s</div>
-						</div>
-						<div class="form-actions">
-							<input type="submit" value="%s" class="form-submit" />
-						</div>', T_("Config.Database.AdminPassword"), T_("Config.Database.Description"), T_("Save.And.Finish"));
+                    <form action="" method="post" accept-charset="UTF-8">
+                        <div class="form-item">
+                            <label for="confirm">%s</label>
+                            <input type="password" id="confirm" name="confirm" value="" class="form-text" />
+                            <div class="description">%s</div>
+                        </div>
+                        <div class="form-actions">
+                            <input type="submit" value="%s" class="form-submit" />
+                        </div>', T_("Config.Database.AdminPassword"), T_("Config.Database.Description"), T_("Save.And.Finish"));
 
                     if (strlen($ViewBag->Error)>0)
                     {

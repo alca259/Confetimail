@@ -42,7 +42,7 @@ class View
 
         try
         {
-        	return $this->LoadView($this->FindViewPath($actionName, $controllerName, $areaName), $controllerName, $areaName, $ViewBag, $isAdmin, $noLayout);
+            return $this->LoadView($this->FindViewPath($actionName, $controllerName, $areaName), $controllerName, $areaName, $ViewBag, $isAdmin, $noLayout);
         }
         catch (MindException $exception)
         {

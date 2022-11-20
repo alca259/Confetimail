@@ -5,97 +5,97 @@
  * All other "real" controllers extend this class.
  */
 class BaseController {
-	/**
-	 *
-	 * @var null Database Connection
-	 */
-	public $db = null;
+    /**
+     *
+     * @var null Database Connection
+     */
+    public $db = null;
     public $ViewBag = null;
     
-	protected $accountModel;
-	protected $fileModel;
+    protected $accountModel;
+    protected $fileModel;
     protected $irModelModel;
-	protected $irModelAccessModel;
-	protected $mailModel;
-	protected $mailAccountModel;
-	protected $mailFileModel;
+    protected $irModelAccessModel;
+    protected $mailModel;
+    protected $mailAccountModel;
+    protected $mailFileModel;
     protected $blogPostModel;
     protected $blogPostCommentModel;
     protected $reviewPostModel;
     protected $surveyAccountModel;
 
-	/**
-	 * Whenever a controller is created, open a database connection too.
-	 * The idea behind is to have ONE connection
-	 * that can be used by multiple models (there are frameworks that open one connection per model).
-	 */
-	function __construct()
+    /**
+     * Whenever a controller is created, open a database connection too.
+     * The idea behind is to have ONE connection
+     * that can be used by multiple models (there are frameworks that open one connection per model).
+     */
+    function __construct()
     {
-		$this->openDatabaseConnection();
+        $this->openDatabaseConnection();
         // Dynamic dictionary, it be resolved in execution time
         $this->ViewBag = new Dictionary();
         $this->ViewBag->Title = "Default";
         
         // Inicializamos todos los modelos para tenerlos utilizables desde las clases hijas
-		$this->accountModel = $this->LoadModel('Account');
-		$this->fileModel = $this->LoadModel('File', Constants::$PanelAreaName);
+        $this->accountModel = $this->LoadModel('Account');
+        $this->fileModel = $this->LoadModel('File', Constants::$PanelAreaName);
         $this->irModelModel = $this->LoadModel('Ir_Model', Constants::$PanelAreaName);
-		$this->irModelAccessModel = $this->LoadModel('Ir_Model_Access', Constants::$PanelAreaName);
-		$this->mailModel = $this->LoadModel('Mail', Constants::$PanelAreaName);
-		$this->mailAccountModel = $this->LoadModel('Mail_Account', Constants::$PanelAreaName);
-		$this->mailFileModel = $this->LoadModel('Mail_File', Constants::$PanelAreaName);
+        $this->irModelAccessModel = $this->LoadModel('Ir_Model_Access', Constants::$PanelAreaName);
+        $this->mailModel = $this->LoadModel('Mail', Constants::$PanelAreaName);
+        $this->mailAccountModel = $this->LoadModel('Mail_Account', Constants::$PanelAreaName);
+        $this->mailFileModel = $this->LoadModel('Mail_File', Constants::$PanelAreaName);
         $this->blogPostModel = $this->LoadModel('Blog_Post', Constants::$PanelAreaName);
         $this->blogPostCommentModel = $this->LoadModel('Blog_Post_Comment', Constants::$PanelAreaName);
         $this->reviewPostModel = $this->LoadModel('Review_Post', Constants::$PanelAreaName);
         $this->surveyAccountModel = $this->LoadModel('Survey_Account', Constants::$PanelAreaName);
-	}
+    }
 
-	/**
-	 * Open the database connection with the credentials from application/config/config.php
-	 */
-	private function openDatabaseConnection()
+    /**
+     * Open the database connection with the credentials from application/config/config.php
+     */
+    private function openDatabaseConnection()
     {
-		// set the (optional) options of the PDO connection. in this case, we set the fetch mode to
-		// "objects", which means all results will be objects, like this: $result->user_name !
-		// For example, fetch mode FETCH_ASSOC would return results like this: $result["user_name] !
-		// @see http://www.php.net/manual/en/pdostatement.fetch.php
-		$options = array (
-			PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
-			PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING
-		);
+        // set the (optional) options of the PDO connection. in this case, we set the fetch mode to
+        // "objects", which means all results will be objects, like this: $result->user_name !
+        // For example, fetch mode FETCH_ASSOC would return results like this: $result["user_name] !
+        // @see http://www.php.net/manual/en/pdostatement.fetch.php
+        $options = array (
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING
+        );
 
-		// generate a database connection, using the PDO connector
-		// @see http://net.tutsplus.com/tutorials/php/why-you-should-be-using-phps-pdo-for-database-access/
-		$this->db = new PDO(DB_TYPE . ':host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS, $options);
-	}
+        // generate a database connection, using the PDO connector
+        // @see http://net.tutsplus.com/tutorials/php/why-you-should-be-using-phps-pdo-for-database-access/
+        $this->db = new PDO(DB_TYPE . ':host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS, $options);
+    }
 
-	/**
-	 * Load the model with the given name.
-	 * @param string $model_name (The name of the model)
+    /**
+     * Load the model with the given name.
+     * @param string $model_name (The name of the model)
      * @param string $area_name
      * @param bool $initialize
-	 * @return object model
-	 */
-	public function LoadModel($model_name, $area_name = "", $initialize = false)
+     * @return object model
+     */
+    public function LoadModel($model_name, $area_name = "", $initialize = false)
     {
-		// Agregamos la extension Model para cargar la clase
-		$model_name .= "Model";
+        // Agregamos la extension Model para cargar la clase
+        $model_name .= "Model";
 
-		// return new model (and pass the database connection to the model)
-		return new $model_name($this->db, $initialize);
-	}
+        // return new model (and pass the database connection to the model)
+        return new $model_name($this->db, $initialize);
+    }
 
-	public function DropModel($model_name, $area_name = "", $initialize = false)
+    public function DropModel($model_name, $area_name = "", $initialize = false)
     {
-		// Agregamos la extension Model para cargar la clase
-		$model_name .= "Model";
+        // Agregamos la extension Model para cargar la clase
+        $model_name .= "Model";
 
-		// Cargamos el modelo
-		$model = new $model_name($this->db);
+        // Cargamos el modelo
+        $model = new $model_name($this->db);
 
         // Borramos la tabla
-		$model->DropTable();
-	}
+        $model->DropTable();
+    }
     
     public function RedirectToAction($action_name = "Index", $controller_name = "Home", $area_name = "")
     {
@@ -164,10 +164,10 @@ class BaseController {
      * @author alca259
      * @version OK
      */
-	public function SendConfetiMailToUser($IdMail, $user_id, $mail_data, $registerDbError = false)
+    public function SendConfetiMailToUser($IdMail, $user_id, $mail_data, $registerDbError = false)
     {
-		$status = MailStatus::NoEnviado;
-		$error_msg = "";
+        $status = MailStatus::NoEnviado;
+        $error_msg = "";
 
         // Obtenemos la informacion del usuario al que queremos enviar
         $domain_account = array(
@@ -178,48 +178,48 @@ class BaseController {
 
         if (!empty($sAccount))
         {
-        	$user_data = $this->accountModel->browse($_SESSION['GUID'], $sAccount);
+            $user_data = $this->accountModel->browse($_SESSION['GUID'], $sAccount);
 
-        	$header_new = str_replace("{DisplayUser}", $user_data[0]["name"], $mail_data[0]["header_for_new"]);
-        	$header_old = str_replace("{DisplayUser}", $user_data[0]["name"], $mail_data[0]["header_for_old"]);
-        	$mensaje = str_replace("{DisplayUser}", $user_data[0]["name"], $mail_data[0]["body"]);
+            $header_new = str_replace("{DisplayUser}", $user_data[0]["name"], $mail_data[0]["header_for_new"]);
+            $header_old = str_replace("{DisplayUser}", $user_data[0]["name"], $mail_data[0]["header_for_old"]);
+            $mensaje = str_replace("{DisplayUser}", $user_data[0]["name"], $mail_data[0]["body"]);
 
-        	// Logica para saber que cabecera enviar
-        	// Comprobamos si al usuario actual, se le ha enviado alguna vez un correo
-        	$domain_new_user = array(
-        			array("user_id", "=", $user_id),
-        	);
+            // Logica para saber que cabecera enviar
+            // Comprobamos si al usuario actual, se le ha enviado alguna vez un correo
+            $domain_new_user = array(
+                    array("user_id", "=", $user_id),
+            );
 
-        	$sCheckAM = $this->mailAccountModel->search($_SESSION['GUID'], $domain_new_user);
+            $sCheckAM = $this->mailAccountModel->search($_SESSION['GUID'], $domain_new_user);
 
-        	if (empty($sCheckAM))
+            if (empty($sCheckAM))
             {
-        		// Es un usuario nuevo
-        		$fullMessage = $header_new . "<br />" . $mensaje;
-        	}
+                // Es un usuario nuevo
+                $fullMessage = $header_new . "<br />" . $mensaje;
+            }
             else
             {
-        		$fullMessage = $header_old . "<br />" . $mensaje;
-        	}
+                $fullMessage = $header_old . "<br />" . $mensaje;
+            }
 
-        	// Intentamos realizar el envio del correo
-        	$email = new Mailer($user_data[0]["email"], $mail_data[0]["subject"], $fullMessage, "text/html");
+            // Intentamos realizar el envio del correo
+            $email = new Mailer($user_data[0]["email"], $mail_data[0]["subject"], $fullMessage, "text/html");
 
-        	// Recojemos el resultado del envio
-        	$statusMail = $email->Send();
+            // Recojemos el resultado del envio
+            $statusMail = $email->Send();
 
-        	if (!$statusMail)
+            if (!$statusMail)
             {
-        		$error_msg .= $email->getMessageMail() . "<br />";
-        		$status = MailStatus::ErroresAlEnviar;
-        	}
+                $error_msg .= $email->getMessageMail() . "<br />";
+                $status = MailStatus::ErroresAlEnviar;
+            }
             else
             {
-        		$status = MailStatus::EnviadoConExito;
-        	}
+                $status = MailStatus::EnviadoConExito;
+            }
         } else {
-        	// User not found
-        	return $error_msg;
+            // User not found
+            return $error_msg;
         }
 
         // Si no requiere un registro en DB, devolvemos el mensaje de error, si lo hay
@@ -230,33 +230,33 @@ class BaseController {
         
         // Data to save
         $data = array(
-        		"user_id" => $user_id,
-        		"mail_id" => $IdMail,
-        		"date_sent" => date("Y-m-d H:i:s"),
-        		"status" => $status,
+                "user_id" => $user_id,
+                "mail_id" => $IdMail,
+                "date_sent" => date("Y-m-d H:i:s"),
+                "status" => $status,
         );
 
         // Buscamos si ya existe el registro
         $domain_account_mail = array(
-        		array("mail_id", "=", $IdMail),
-        		array("user_id", "=", $user_id),
+                array("mail_id", "=", $IdMail),
+                array("user_id", "=", $user_id),
         );
 
         $sAM = $this->mailAccountModel->search($_SESSION['GUID'], $domain_account_mail);
 
         if (empty($sAM))
         {
-        	// Si no existe, lo creamos
-        	$this->mailAccountModel->create($_SESSION['GUID'], $data);
+            // Si no existe, lo creamos
+            $this->mailAccountModel->create($_SESSION['GUID'], $data);
         }
         else
         {
-        	// Si existe, lo modificamos
-        	$this->mailAccountModel->write($_SESSION['GUID'], $sAM, $data);
+            // Si existe, lo modificamos
+            $this->mailAccountModel->write($_SESSION['GUID'], $sAM, $data);
         }
 
-		return $error_msg;
-	}
+        return $error_msg;
+    }
     
     /**
      * Genera una contraseña aleatoria
@@ -322,8 +322,8 @@ class BaseController {
      * @author alca259
      * @version OK
      */
-	public function CryptPassword($pass, $salt)
+    public function CryptPassword($pass, $salt)
     {
-		return sha1(md5(sha1(md5(sha1($pass.$salt)))));
-	}
+        return sha1(md5(sha1(md5(sha1($pass.$salt)))));
+    }
 }

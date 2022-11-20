@@ -223,7 +223,7 @@ $carouselName = "carouselHome";
             $divider = 6;
             foreach ($ViewBag->Mails as $mail)
             {
-        	    if ($idx % $divider == 0)
+                if ($idx % $divider == 0)
                 {
                     if ($idx != 0) echo "</div>";
                     echo "<br />";

@@ -8,41 +8,41 @@
  */
 class SecurityController extends BaseController
 {
-	#region Variables privadas
+    #region Variables privadas
     private $controllerName;
     #endregion
 
     #region Constructor
-	public function __construct()
+    public function __construct()
     {
-		// Llamamos al constructor padre
-		parent::__construct();
+        // Llamamos al constructor padre
+        parent::__construct();
         $this->controllerName = str_replace("Controller", "", __CLASS__);
-	}
+    }
     #endregion
 
-	#region Action controllers
+    #region Action controllers
     /**
      * Carga la vista principal de modelos
      * @author alca259
      * @version OK
      */
-	public function Index()
+    public function Index()
     {
-		if (Security::IsAuthorizedAdmin())
+        if (Security::IsAuthorizedAdmin())
         {
             $this->ViewBag->CurrentMenu = "Security";
             $this->ViewBag->Title = "Seguridad";
             return new View(__FUNCTION__, $this->controllerName, $this->ViewBag, Constants::$PanelAreaName, true);
-		}
+        }
         else
         {
-			return parent::RedirectToAction("401");
-		}
-	}
+            return parent::RedirectToAction("401");
+        }
+    }
     #endregion
 
-	#region Action Ajax
+    #region Action Ajax
     
     #region Permisos de usuario
     /**
@@ -235,7 +235,7 @@ class SecurityController extends BaseController
                 foreach ($json_data["permIds"] as $key_model => $access)
                 {
                     // Copiamos el array en cada vuelta
-                	$data = $accessData;
+                    $data = $accessData;
                     
                     if (!isset($access["model_id"]) || strlen($access["model_id"]) <= 0)
                     {
@@ -266,7 +266,7 @@ class SecurityController extends BaseController
                         {
                             switch ($item["index"])
                             {
-                            	case 0:
+                                case 0:
                                     # perm_read
                                     $data['perm_read'] = isset($item['checked']) && $item['checked'];
                                     break;
@@ -501,7 +501,7 @@ class SecurityController extends BaseController
                 foreach ($json_data["permIds"] as $key_model => $access)
                 {
                     // Copiamos el array en cada vuelta
-                	$data = $accessData;
+                    $data = $accessData;
                     
                     if (!isset($access["model_id"]) || strlen($access["model_id"]) <= 0)
                     {
@@ -526,7 +526,7 @@ class SecurityController extends BaseController
                         {
                             switch ($item["index"])
                             {
-                            	case 0:
+                                case 0:
                                     # perm_read
                                     $data['perm_read_anon'] = isset($item['checked']) && $item['checked'];
                                     break;

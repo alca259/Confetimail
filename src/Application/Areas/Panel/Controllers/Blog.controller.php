@@ -1,48 +1,48 @@
 <?php
 class BlogController extends BaseController
 {
-	#region Variables privadas
+    #region Variables privadas
     private $controllerName;
     #endregion
     
     #region Constructors
-	public function __construct() 
+    public function __construct() 
     {
-		// Llamamos al constructor padre
-		parent::__construct();
+        // Llamamos al constructor padre
+        parent::__construct();
         $this->controllerName = str_replace("Controller", "", __CLASS__);
-	}
+    }
     #endregion
 
-	#region Action controllers
-	/**
+    #region Action controllers
+    /**
      * Carga la vista del indice
-	 * @author alca259
-	 * @version OK
-	 */
-	public function Index()
+     * @author alca259
+     * @version OK
+     */
+    public function Index()
     {
         if (Security::IsAuthorizedAdmin())
         {
             $this->ViewBag->CurrentMenu = "Blog";
             $this->ViewBag->Title = "Blog";
             return new View(__FUNCTION__, $this->controllerName, $this->ViewBag, Constants::$PanelAreaName, true);
-		}
+        }
         else
         {
-			return parent::RedirectToAction("401");
-		}
-	}
+            return parent::RedirectToAction("401");
+        }
+    }
 
-	/**
+    /**
      * Carga la información de la entrada actual
-	 * @author alca259
-	 * @version OK
-	 * @param int $Id
-	 */
-	public function Manage($Id = 0)
+     * @author alca259
+     * @version OK
+     * @param int $Id
+     */
+    public function Manage($Id = 0)
     {
-		if (Security::IsAuthorizedAdmin())
+        if (Security::IsAuthorizedAdmin())
         {
             try
             {
@@ -65,21 +65,21 @@ class BlogController extends BaseController
             }
             catch (Exception $ex)
             {
-            	$this->ViewBag->Error = parent::ErrorJson($ex);
+                $this->ViewBag->Error = parent::ErrorJson($ex);
             }
             
             $this->ViewBag->CurrentMenu = "Blog";
             $this->ViewBag->Title = "Entrada de blog";
             return new View(__FUNCTION__, $this->controllerName, $this->ViewBag, Constants::$PanelAreaName, true);
-		}
+        }
         else
         {
-			return parent::RedirectToAction("401");
-		}
-	}
+            return parent::RedirectToAction("401");
+        }
+    }
     #endregion
 
-	#region Action Ajax
+    #region Action Ajax
     
     #region Read actions
     /**
@@ -87,13 +87,13 @@ class BlogController extends BaseController
      * @author alca259
      * @version OK
      */
-	public function Posts_Read()
+    public function Posts_Read()
     {
         $result = array("success" => false, "data" => array(), "message" => "");
         
         try
         {
-		    $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
+            $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
 
             if (!Security::IsAuthorizedAdmin() || $ajaxCall != 1)
             {
@@ -144,26 +144,26 @@ class BlogController extends BaseController
         }
         
         echo JsonHandler::Encode($result);
-	}
+    }
     
     /**
      * Devuelve una lista de comentarios de un post registrados en el sistema
      * @author alca259
      * @version OK
      */
-	public function Comments_Read()
+    public function Comments_Read()
     {
         $result = array("success" => false, "data" => array(), "message" => "");
         
         try
         {
             $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
-		    $request = file_get_contents('php://input');
+            $request = file_get_contents('php://input');
 
-		    if ($request)
+            if ($request)
             {
-			    $json_data = JsonHandler::NormalDecode($request, true);
-		    }
+                $json_data = JsonHandler::NormalDecode($request, true);
+            }
 
             if (!Security::IsAuthorizedAdmin() || $ajaxCall != 1)
             {
@@ -231,28 +231,28 @@ class BlogController extends BaseController
         }
         
         echo JsonHandler::Encode($result);
-	}
+    }
     #endregion
     
     #region Create/Update/Delete
-	/**
+    /**
      * Crea o modifica una entrada
-	 * @author alca259
-	 * @version OK
-	 */
-	public function SavePost()
+     * @author alca259
+     * @version OK
+     */
+    public function SavePost()
     {
-		$result = array("success" => false, "data" => array(), "message" => "");
+        $result = array("success" => false, "data" => array(), "message" => "");
         
         try
         {
-		    $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
-		    $request = file_get_contents('php://input');
+            $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
+            $request = file_get_contents('php://input');
 
-		    if ($request)
+            if ($request)
             {
-			    $json_data = JsonHandler::NormalDecode($request, true);
-		    }
+                $json_data = JsonHandler::NormalDecode($request, true);
+            }
 
             if (!Security::IsAuthorizedAdmin() || $ajaxCall != 1)
             {
@@ -268,7 +268,7 @@ class BlogController extends BaseController
                 throw new Exception("Required data not found");
             }
 
-			// Preparamos los datos
+            // Preparamos los datos
             $postbody = $json_data["PostBody"];
             $subject = $json_data["Subject"];
             $Action = $json_data['Action'];
@@ -281,19 +281,19 @@ class BlogController extends BaseController
                 $date_published = date("Y-m-d", strtotime(str_replace('/', '-', $json_data['DatePublished'])));
             }
             
-			$Id = (isset($json_data['Id']) && strlen($json_data['Id']) > 0) ? $json_data['Id'] : "0";
+            $Id = (isset($json_data['Id']) && strlen($json_data['Id']) > 0) ? $json_data['Id'] : "0";
             
-			$data = array(
-				'subject' => $subject,
-				'post_body' => $postbody,
-				'date_published' => $date_published,
-				'active' => $active,
+            $data = array(
+                'subject' => $subject,
+                'post_body' => $postbody,
+                'date_published' => $date_published,
+                'active' => $active,
                 'image_frontend' => $imagefrontend
-			);
+            );
 
             switch ($Action)
             {
-            	case "Draft":
+                case "Draft":
                     // Creamos el modelo
                     $Id = $this->blogPostModel->Create($_SESSION['GUID'], $data);
                     break;
@@ -314,7 +314,7 @@ class BlogController extends BaseController
                     throw new Exception(sprintf("Action %s not allowed", $Action));
             }
 
-			$json_data["Id"] = $Id;
+            $json_data["Id"] = $Id;
 
             $result["data"] = $json_data;
             $result["success"] = true;
@@ -331,26 +331,26 @@ class BlogController extends BaseController
         }
         
         echo JsonHandler::NormalEncode($result);
-	}
+    }
 
-	/**
+    /**
      * Elimina una entrada
-	 * @author alca259
-	 * @version OK
-	 */
-	public function DeletePost()
+     * @author alca259
+     * @version OK
+     */
+    public function DeletePost()
     {
-		$result = array("success" => false, "data" => array(), "message" => "");
+        $result = array("success" => false, "data" => array(), "message" => "");
         
         try
         {
-		    $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
-		    $request = file_get_contents('php://input');
+            $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
+            $request = file_get_contents('php://input');
 
-		    if ($request)
+            if ($request)
             {
-			    $json_data = JsonHandler::NormalDecode($request, true);
-		    }
+                $json_data = JsonHandler::NormalDecode($request, true);
+            }
 
             if (!Security::IsAuthorizedAdmin() || $ajaxCall != 1)
             {
@@ -363,20 +363,20 @@ class BlogController extends BaseController
                 throw new Exception("No data found");
             }
 
-			// Vars
-			$Id = $json_data["Id"];
+            // Vars
+            $Id = $json_data["Id"];
 
-			// Creamos la busqueda de validacion
-			$domain_model = array(array("id", "=", $Id));
+            // Creamos la busqueda de validacion
+            $domain_model = array(array("id", "=", $Id));
 
-			// Buscamos aquellos emails que coincidan
-			$sModel = $this->blogPostModel->Search($_SESSION['GUID'], $domain_model);
+            // Buscamos aquellos emails que coincidan
+            $sModel = $this->blogPostModel->Search($_SESSION['GUID'], $domain_model);
 
-			// Si lo encontramos, lo borramos
-			if (!empty($sModel))
+            // Si lo encontramos, lo borramos
+            if (!empty($sModel))
             {
-				$this->blogPostModel->Unlink($_SESSION['GUID'], $sModel);
-			}
+                $this->blogPostModel->Unlink($_SESSION['GUID'], $sModel);
+            }
        
             $result["data"] = $json_data;
             $result["success"] = true;
@@ -393,26 +393,26 @@ class BlogController extends BaseController
         }
         
         echo JsonHandler::Encode($result);
-	}
+    }
     
     /**
      * Elimina un comentario
      * @author alca259
      * @version OK
      */
-	public function Comment_Delete()
+    public function Comment_Delete()
     {
-		$result = array("success" => false, "data" => array(), "message" => "");
+        $result = array("success" => false, "data" => array(), "message" => "");
         
         try
         {
-		    $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
-		    $request = file_get_contents('php://input');
+            $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
+            $request = file_get_contents('php://input');
 
-		    if ($request)
+            if ($request)
             {
-			    $json_data = JsonHandler::NormalDecode($request, true);
-		    }
+                $json_data = JsonHandler::NormalDecode($request, true);
+            }
 
             if (!Security::IsAuthorizedAdmin() || $ajaxCall != 1)
             {
@@ -425,20 +425,20 @@ class BlogController extends BaseController
                 throw new Exception("No data found");
             }
 
-			// Vars
-			$Id = $json_data["Id"];
+            // Vars
+            $Id = $json_data["Id"];
 
-			// Creamos la busqueda de validacion
-			$domain_model = array(array("id", "=", $Id));
+            // Creamos la busqueda de validacion
+            $domain_model = array(array("id", "=", $Id));
 
-			// Buscamos aquellos emails que coincidan
-			$sModel = $this->blogPostCommentModel->Search($_SESSION['GUID'], $domain_model);
+            // Buscamos aquellos emails que coincidan
+            $sModel = $this->blogPostCommentModel->Search($_SESSION['GUID'], $domain_model);
 
-			// Si lo encontramos, lo borramos
-			if (!empty($sModel))
+            // Si lo encontramos, lo borramos
+            if (!empty($sModel))
             {
-				$this->blogPostCommentModel->Unlink($_SESSION['GUID'], $sModel);
-			}
+                $this->blogPostCommentModel->Unlink($_SESSION['GUID'], $sModel);
+            }
             
             $result["data"] = $json_data;
             $result["success"] = true;
@@ -455,64 +455,64 @@ class BlogController extends BaseController
         }
         
         echo JsonHandler::Encode($result);
-	}
+    }
     #endregion
     
-	#region File Functions
-	/**
-	 * Devuelve una lista de imagenes que son de portada
-	 * @author alca259
-	 * @version OK
-	 */
-	public function Images_Read()
+    #region File Functions
+    /**
+     * Devuelve una lista de imagenes que son de portada
+     * @author alca259
+     * @version OK
+     */
+    public function Images_Read()
     {
         $result = array("success" => false, "data" => array(), "message" => "");
         
         try
         {
-		    $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
+            $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
 
             if (!Security::IsAuthorizedAdmin() || $ajaxCall != 1)
             {
                 throw new Exception("Unathorized user");
             }
             
-		    $result["data"] = array(
-			    "rows" => array(),
-			    "totalCount" => 0
-		    );
+            $result["data"] = array(
+                "rows" => array(),
+                "totalCount" => 0
+            );
 
-			// Vars
-			$valid_files = array();
+            // Vars
+            $valid_files = array();
 
-			// Buscamos todos los ficheros permitidos
-			$domain_files = array(
-				array("active", "=", true),
-				array("file_category", "=", "frontend"),
-				array("file_type", "=", "image"),
-			);
+            // Buscamos todos los ficheros permitidos
+            $domain_files = array(
+                array("active", "=", true),
+                array("file_category", "=", "frontend"),
+                array("file_type", "=", "image"),
+            );
 
-			// Realizamos la busqueda
-			$sFiles = $this->fileModel->Search($_SESSION['GUID'], $domain_files);
+            // Realizamos la busqueda
+            $sFiles = $this->fileModel->Search($_SESSION['GUID'], $domain_files);
 
-			// Obtencion de datos
-			if (!empty($sFiles))
+            // Obtencion de datos
+            if (!empty($sFiles))
             {
-				$valid_files = $this->fileModel->Browse($_SESSION['GUID'], $sFiles, "name ASC");
-			}
+                $valid_files = $this->fileModel->Browse($_SESSION['GUID'], $sFiles, "name ASC");
+            }
 
-			// Recorremos todos los ficheros validos
-			foreach ($valid_files as $file)
+            // Recorremos todos los ficheros validos
+            foreach ($valid_files as $file)
             {
-				$itemData = array(
-					"id" => $file['id'],
-					"name" => utf8_encode($file['file_url']),
+                $itemData = array(
+                    "id" => $file['id'],
+                    "name" => utf8_encode($file['file_url']),
                     "type" => "f",
-				);
+                );
 
                 $result["data"]["rows"][] = $itemData;
                 $result["data"]["totalCount"]++;
-			}
+            }
 
             $result["success"] = true;
         }
@@ -528,57 +528,57 @@ class BlogController extends BaseController
         }
         
         echo JsonHandler::Encode($result);
-	}
+    }
     #endregion
 
     #endregion
     
-	#region Private methods
-	/**
-	 * Devuelve los datos de una entrada, codificado en json y utf-8
-	 * @author alca259
-	 * @version OK
+    #region Private methods
+    /**
+     * Devuelve los datos de una entrada, codificado en json y utf-8
+     * @author alca259
+     * @version OK
      * @param $Id
-	 * @param bool $EncodeToJson
-	 */
-	private function GetPostWithId($Id, $EncodeToJson = false)
+     * @param bool $EncodeToJson
+     */
+    private function GetPostWithId($Id, $EncodeToJson = false)
     {
         try
         {
-		    // preparamos las variables a devolver
-		    $itemData = array();
+            // preparamos las variables a devolver
+            $itemData = array();
 
-		    // Creamos la busqueda de validacion
-		    $domain_model = array(array("id", "=", $Id));
+            // Creamos la busqueda de validacion
+            $domain_model = array(array("id", "=", $Id));
 
-		    // Buscamos aquel email que coincida
-		    $sModel = $this->blogPostModel->Search($_SESSION['GUID'], $domain_model);
+            // Buscamos aquel email que coincida
+            $sModel = $this->blogPostModel->Search($_SESSION['GUID'], $domain_model);
 
-		    // Si lo encontramos, lo obtenemos
-		    if (empty($sModel) && $Id > 0)
+            // Si lo encontramos, lo obtenemos
+            if (empty($sModel) && $Id > 0)
             {
-			    throw new Exception("Error al obtener la entrada");
+                throw new Exception("Error al obtener la entrada");
             }
             elseif ($Id == 0)
             {
                 return $itemData;
             }
             
-			$items = $this->blogPostModel->Browse($_SESSION['GUID'], $sModel);
+            $items = $this->blogPostModel->Browse($_SESSION['GUID'], $sModel);
 
-			foreach ($items as $item)
+            foreach ($items as $item)
             {
-				$itemData = array(
-					"Id" => $item['id'],
-					"Subject" => utf8_encode($item['subject']),
-					"PostBody" => html_entity_decode(stripslashes(utf8_encode($item['post_body']))),
-					"DatePublished" => str_replace('-', '/', date("d-m-Y", strtotime($item['date_published']))),
+                $itemData = array(
+                    "Id" => $item['id'],
+                    "Subject" => utf8_encode($item['subject']),
+                    "PostBody" => html_entity_decode(stripslashes(utf8_encode($item['post_body']))),
+                    "DatePublished" => str_replace('-', '/', date("d-m-Y", strtotime($item['date_published']))),
                     "ImageFrontend" => utf8_encode($item['image_frontend']),
-					"Active" => $item['active'] == 1 ? "true" : "false",
-				);
-			}
+                    "Active" => $item['active'] == 1 ? "true" : "false",
+                );
+            }
 
-			// Devolvemos un objeto
+            // Devolvemos un objeto
             return $EncodeToJson ? JsonHandler::Encode($itemData) : $itemData;
         }
         catch (ORMException $ex)
@@ -591,6 +591,6 @@ class BlogController extends BaseController
             // Errors found, return json error
             return parent::ErrorJson($ex);
         }
-	}
+    }
     #endregion
 }

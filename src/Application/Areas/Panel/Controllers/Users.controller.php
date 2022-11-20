@@ -2,47 +2,47 @@
 
 class UsersController extends BaseController
 {
-	#region Variables privadas
+    #region Variables privadas
     private $controllerName;
     #endregion
 
     #region Constructors
-	public function __construct()
+    public function __construct()
     {
-		// Llamamos al constructor padre
-		parent::__construct();
+        // Llamamos al constructor padre
+        parent::__construct();
         $this->controllerName = str_replace("Controller", "", __CLASS__);
-	}
+    }
     #endregion
 
-	#region Action controllers
+    #region Action controllers
     /**
      * Carga la pantalla principal de usuarios
      * @author alca259
      * @version OK
      */
-	public function Index()
+    public function Index()
     {
-		if (Security::IsAuthorizedAdmin())
+        if (Security::IsAuthorizedAdmin())
         {
             $this->ViewBag->CurrentMenu = "Users";
             $this->ViewBag->Title = "Usuarios";
             return new View(__FUNCTION__, $this->controllerName, $this->ViewBag, Constants::$PanelAreaName, true);
-		}
+        }
         else
         {
             return parent::RedirectToAction("401");
-		}
-	}
+        }
+    }
     #endregion
 
-	#region Action Ajax
+    #region Action Ajax
     /**
      * Funcion que carga los usuarios en un grid
      * @author alca259
      * @version OK
      */
-	public function Users_Read()
+    public function Users_Read()
     {
         $result = array("success" => false, "data" => array(), "message" => "");
         
@@ -103,7 +103,7 @@ class UsersController extends BaseController
         }
         
         echo JsonHandler::Encode($result);
-	}
+    }
 
     /**
      * Función que registra, actualiza y elimina a un usuario manualmente
@@ -247,12 +247,12 @@ class UsersController extends BaseController
         try
         {
             $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
-		    $request = file_get_contents('php://input');
+            $request = file_get_contents('php://input');
 
-		    if ($request)
+            if ($request)
             {
-			    $json_data = JsonHandler::NormalDecode($request, true);
-		    }
+                $json_data = JsonHandler::NormalDecode($request, true);
+            }
 
             if (!Security::IsAuthorizedAdmin() || $ajaxCall != 1)
             {
@@ -284,8 +284,8 @@ class UsersController extends BaseController
             
             // Rellenamos los datos faltantes
             $data = array();
-		    $data['password_salt'] = StringUtil::RandString(200);
-		    $data['password'] = $this->CryptPassword($newPassword, $data['password_salt']);
+            $data['password_salt'] = StringUtil::RandString(200);
+            $data['password'] = $this->CryptPassword($newPassword, $data['password_salt']);
 
             // Modificamos en DB los datos del usuario
             $this->accountModel->Write($_SESSION['GUID'], array($user_id), $data);

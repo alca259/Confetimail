@@ -1,41 +1,41 @@
 <?php
 class ReviewsController extends BaseController
 {
-	#region Variables privadas
+    #region Variables privadas
     private $controllerName;
     #endregion
     
     #region Constructors
-	public function __construct() 
+    public function __construct() 
     {
-		// Llamamos al constructor padre
-		parent::__construct();
+        // Llamamos al constructor padre
+        parent::__construct();
         $this->controllerName = str_replace("Controller", "", __CLASS__);
-	}
+    }
     #endregion
 
-	#region Action controllers
-	/**
+    #region Action controllers
+    /**
      * Carga la vista del indice
-	 * @author alca259
-	 * @version OK
-	 */
-	public function Index()
+     * @author alca259
+     * @version OK
+     */
+    public function Index()
     {
         if (Security::IsAuthorizedAdmin())
         {
             $this->ViewBag->CurrentMenu = "Reviews";
             $this->ViewBag->Title = "Comentarios";
             return new View(__FUNCTION__, $this->controllerName, $this->ViewBag, Constants::$PanelAreaName, true);
-		}
+        }
         else
         {
-			return parent::RedirectToAction("401");
-		}
-	}
+            return parent::RedirectToAction("401");
+        }
+    }
     #endregion
 
-	#region Action Ajax
+    #region Action Ajax
     
     #region Read actions
     /**
@@ -43,13 +43,13 @@ class ReviewsController extends BaseController
      * @author alca259
      * @version OK
      */
-	public function Reviews_Read()
+    public function Reviews_Read()
     {
         $result = array("success" => false, "data" => array(), "message" => "");
         
         try
         {
-		    $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
+            $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
 
             if (!Security::IsAuthorizedAdmin() || $ajaxCall != 1)
             {
@@ -112,28 +112,28 @@ class ReviewsController extends BaseController
         }
         
         echo JsonHandler::Encode($result);
-	}
+    }
     #endregion
     
     #region Create/Update/Delete
-	/**
+    /**
      * Elimina un comentario
-	 * @author alca259
-	 * @version OK
-	 */
-	public function DeleteReview()
+     * @author alca259
+     * @version OK
+     */
+    public function DeleteReview()
     {
-		$result = array("success" => false, "data" => array(), "message" => "");
+        $result = array("success" => false, "data" => array(), "message" => "");
         
         try
         {
-		    $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
-		    $request = file_get_contents('php://input');
+            $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
+            $request = file_get_contents('php://input');
 
-		    if ($request)
+            if ($request)
             {
-			    $json_data = JsonHandler::NormalDecode($request, true);
-		    }
+                $json_data = JsonHandler::NormalDecode($request, true);
+            }
 
             if (!Security::IsAuthorizedAdmin() || $ajaxCall != 1)
             {
@@ -146,20 +146,20 @@ class ReviewsController extends BaseController
                 throw new Exception("No data found");
             }
 
-			// Vars
-			$Id = $json_data["Id"];
+            // Vars
+            $Id = $json_data["Id"];
 
-			// Creamos la busqueda de validacion
-			$domain_model = array(array("id", "=", $Id));
+            // Creamos la busqueda de validacion
+            $domain_model = array(array("id", "=", $Id));
 
-			// Buscamos aquellos emails que coincidan
-			$sModel = $this->reviewPostModel->Search($_SESSION['GUID'], $domain_model);
+            // Buscamos aquellos emails que coincidan
+            $sModel = $this->reviewPostModel->Search($_SESSION['GUID'], $domain_model);
 
-			// Si lo encontramos, lo borramos
-			if (!empty($sModel))
+            // Si lo encontramos, lo borramos
+            if (!empty($sModel))
             {
-				$this->reviewPostModel->Unlink($_SESSION['GUID'], $sModel);
-			}
+                $this->reviewPostModel->Unlink($_SESSION['GUID'], $sModel);
+            }
        
             $result["data"] = $json_data;
             $result["success"] = true;
@@ -176,7 +176,7 @@ class ReviewsController extends BaseController
         }
         
         echo JsonHandler::Encode($result);
-	}
+    }
     #endregion
     
     #endregion

@@ -2,7 +2,7 @@
 
 class AdminController extends BaseController
 {
-	#region Variables privadas
+    #region Variables privadas
     private $controllerName;
     private $mesesN = array(
         1 => "Enero",       2 => "Febrero",     3 => "Marzo",       4 => "Abril",
@@ -12,36 +12,36 @@ class AdminController extends BaseController
     #endregion
 
     #region Constructors
-	public function __construct()
+    public function __construct()
     {
-		// Llamamos al constructor padre
-		parent::__construct();
+        // Llamamos al constructor padre
+        parent::__construct();
         $this->controllerName = str_replace("Controller", "", __CLASS__);
-	}
+    }
     #endregion
 
-	#region Action controllers
+    #region Action controllers
     /**
      * Carga la pantalla principal de usuarios
      * @author alca259
      * @version OK
      */
-	public function Index()
+    public function Index()
     {
-		if (Security::IsAuthorizedAdmin())
+        if (Security::IsAuthorizedAdmin())
         {
             $this->ViewBag->CurrentMenu = "Home";
             $this->ViewBag->Title = "Administración de Confeti";
             return new View(__FUNCTION__, $this->controllerName, $this->ViewBag, Constants::$PanelAreaName, true);
-		}
+        }
         else
         {
             return parent::RedirectToAction("401");
-		}
-	}
+        }
+    }
     #endregion
 
-	#region Action Ajax
+    #region Action Ajax
     public function UsersMonthly_Read()
     {
         $result = array("success" => false, "data" => array(), "message" => "");
@@ -276,7 +276,7 @@ class AdminController extends BaseController
                     
                     foreach ($bReviews as $review)
                     {
-                    	$total_score += $review['score'];
+                        $total_score += $review['score'];
                     }
                     
                     $itemData["valueNumber"] = ($total_score / $total_numbers);

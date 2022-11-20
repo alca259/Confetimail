@@ -2,46 +2,46 @@
 
 class BlogController extends BaseController
 {
-	#region Variables privadas
+    #region Variables privadas
     private $controllerName;
     #endregion
 
     #region Constructors
-	public function __construct()
+    public function __construct()
     {
-		// Llamamos al constructor padre
-		parent::__construct();
+        // Llamamos al constructor padre
+        parent::__construct();
         $this->controllerName = str_replace("Controller", "", __CLASS__);
-	}
+    }
     #endregion
 
-	#region Controller actions
+    #region Controller actions
     /**
      * Carga la pantalla principal
      * @author alca259
      * @version OK
      */
-	public function Index()
+    public function Index()
     {
         $this->ViewBag->CurrentMenu = "Blog";
-		$this->ViewBag->Title = T_("Blog");
+        $this->ViewBag->Title = T_("Blog");
         return new View(__FUNCTION__, $this->controllerName, $this->ViewBag);
-	}
+    }
     
     /**
      * Carga la pantalla principal
      * @author alca259
      * @version OK
      */
-	public function Reading($blogId)
+    public function Reading($blogId)
     {
         $item = $this->blogPostModel->Browse(ROOT_USER, array($blogId))[0];
         
         $this->ViewBag->CurrentMenu = "Blog";
-		$this->ViewBag->Title = T_("Blog").": ".utf8_encode($item['subject']);
+        $this->ViewBag->Title = T_("Blog").": ".utf8_encode($item['subject']);
         $this->ViewBag->BlogId = $blogId;
         return new View(__FUNCTION__, $this->controllerName, $this->ViewBag);
-	}
+    }
     #endregion
     
     #region Ajax actions
@@ -50,13 +50,13 @@ class BlogController extends BaseController
      * @author alca259
      * @version OK
      */
-	public function Blog_Read()
+    public function Blog_Read()
     {
         $result = array("success" => false, "data" => array(), "message" => "");
         
         try
         {
-		    $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
+            $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
             
             if ($ajaxCall != 1)
             {
@@ -65,10 +65,10 @@ class BlogController extends BaseController
             
             $request = file_get_contents('php://input');
 
-		    if ($request)
+            if ($request)
             {
-			    $json_data = JsonHandler::NormalDecode($request, true);
-		    }
+                $json_data = JsonHandler::NormalDecode($request, true);
+            }
             
             if (!isset($json_data)
                 || !isset($json_data["SelectedPage"])
@@ -140,20 +140,20 @@ class BlogController extends BaseController
         }
         
         echo JsonHandler::Encode($result);
-	}
+    }
     
     /**
      * Devuelve una lista de entradas registradas en el sistema
      * @author alca259
      * @version OK
      */
-	public function Entry_Read()
+    public function Entry_Read()
     {
         $result = array("success" => false, "data" => array(), "message" => "");
         
         try
         {
-		    $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
+            $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
             
             if ($ajaxCall != 1)
             {
@@ -162,10 +162,10 @@ class BlogController extends BaseController
             
             $request = file_get_contents('php://input');
 
-		    if ($request)
+            if ($request)
             {
-			    $json_data = JsonHandler::NormalDecode($request, true);
-		    }
+                $json_data = JsonHandler::NormalDecode($request, true);
+            }
             
             if (!isset($json_data)
                 || !isset($json_data["SelectedBlogId"]))
@@ -190,7 +190,7 @@ class BlogController extends BaseController
         }
         
         echo JsonHandler::Encode($result);
-	}
+    }
     #endregion
     
     #region Private methods
@@ -290,7 +290,7 @@ class BlogController extends BaseController
         
         try
         {
-		    $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
+            $ajaxCall = Security::VerifyAjax($_SERVER['REQUEST_METHOD']);
             
             if ($ajaxCall != 1)
             {
@@ -299,10 +299,10 @@ class BlogController extends BaseController
             
             $request = file_get_contents('php://input');
 
-		    if ($request)
+            if ($request)
             {
-			    $json_data = JsonHandler::NormalDecode($request, true);
-		    }
+                $json_data = JsonHandler::NormalDecode($request, true);
+            }
             
             if (!isset($json_data)
                 || !isset($json_data["Comment"])
@@ -313,11 +313,11 @@ class BlogController extends BaseController
 
             // Guardamos los datos
             $data = array(
-				'user_id' => $_SESSION['GUID'],
-				'comments' => nl2br($json_data["Comment"]),
-				'date_published' => date("Y-m-d H:i:s"),
-				'post_id' => $json_data["PostId"]
-			);
+                'user_id' => $_SESSION['GUID'],
+                'comments' => nl2br($json_data["Comment"]),
+                'date_published' => date("Y-m-d H:i:s"),
+                'post_id' => $json_data["PostId"]
+            );
             
             $this->blogPostCommentModel->Create($_SESSION['GUID'], $data);
             
@@ -335,6 +335,6 @@ class BlogController extends BaseController
         }
         
         echo JsonHandler::Encode($result);
-	}
+    }
     #endregion
 }
