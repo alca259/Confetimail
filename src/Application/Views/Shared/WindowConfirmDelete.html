@@ -1,0 +1,150 @@
+<style type="text/css">
+    #DeleteDialog {
+        font-size: 12px;
+    }
+    #DeleteDialog .window-footer {
+        position: absolute;
+        bottom: 0;
+        display: block;
+        width: 90%;
+        margin-top: 15px;
+        padding: 19px 0 20px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+    #DeleteDialog .DeleteDialog_Icon {
+        float: left;
+        width: 50px;
+    }
+</style>
+
+<script type="text/javascript">
+    var DeleteIcon = "/Public/img/ui/icons_dialogs/error.png";
+
+    /// <summary>
+    /// Show the WaitDialog.
+    /// <summary>
+    /// <param name="settings" type="JSON object">
+    /// Contains all the settings for the dialog.
+    // </param>
+    function DeleteBox(callback, params, message, title, width, height, okButton, cancelButton) {
+        showDeleteDialog = function () {
+            DeleteDialog.ShowWindow({
+                title: title == undefined ? "Confirmación de borrado" : title,
+                message: message == undefined ? "Los datos se perderán para siempre y no se podrán recuperar. ¿Estas segur@ de querer continuar?" : message,
+                height: height == undefined ? 200 : height,
+                width: width == undefined ? 400 : width,
+                icon: DeleteIcon,
+                okButton: okButton == undefined ? "Si": okButton,
+                cancelButton: cancelButton == undefined ? "No": cancelButton,
+                callback: callback == undefined ? undefined : callback,
+                params: params == undefined ? undefined : params
+            });
+        };
+        showDeleteDialog();
+    }
+
+    var DeleteDialog = function () {
+        // Settings passed into the dialog.
+        var _settings = null;
+
+        var ShowWindow = function (settings) {
+            _settings = settings;
+
+            try {
+
+                if (_settings.height != null) {
+                    $('#DeleteDialog').data("kendoWindow").setOptions({ height: _settings.height });
+                }
+
+                if (_settings.width != null) {
+                    $('#DeleteDialog').data("kendoWindow").setOptions({ width: _settings.width });
+                    $('#WDeleteDialog_MessageColumn').css('max-width', (parseInt(_settings.width.toString().replace('px', '') - 100) + 'px'));
+                }
+
+                if (_settings.title != null) {
+                    $('#DeleteDialog').data("kendoWindow").setOptions({ title: _settings.title });
+                }
+
+                $('#DeleteDialog_Image').attr("src", _settings.icon);
+                $('#DeleteDialog_Message').text(_settings.message);
+
+                // Set events
+                $('#DeleteDialog_Cancel').on('click', function(e) {
+                    e.preventDefault();
+
+                });
+
+                // Open the dialog.
+                $('#DeleteDialog').data("kendoWindow").center().open();
+            }
+            catch (e) {
+                alert(e);
+            }
+        };
+
+        var Button_OnClick = function (button) {
+            var wnd = $('#DeleteDialog').data("kendoWindow");
+            wnd.close();
+
+            if (_settings.callback != null && button.textContent == _settings.okButton) {
+                _settings.callback.call(this, _settings.params);
+            }
+        };
+
+        var Window_OnClose = function () {
+            var wnd = $('#DeleteDialog').data("kendoWindow");
+
+            if (wnd === undefined || wnd == null) return;
+            wnd.close();
+        };
+
+        return {
+            ShowWindow: ShowWindow,
+            ButtonOnClick: Button_OnClick,
+            CloseWindow: Window_OnClose
+        };
+    }();
+
+    $(document).ready(function() {
+        $("#DeleteDialog").kendoWindow({
+            width: 400,
+            height: 200,
+            resizable: false,
+            draggable: false,
+            actions: [],
+            title: "Confirmación...",
+            visible: false,
+            modal: true
+        });
+
+        // Deshabilitar ESC
+        $(function () {
+            kendo.ui.Window.fn._keydown = function (originalFn) {
+                var KEY_ESC = 27;
+                return function (e) {
+                    if (e.which !== KEY_ESC) {
+                        originalFn.call(this, e);
+                    }
+                };
+            }(kendo.ui.Window.fn._keydown);
+        });
+    });
+</script>
+
+<div id="DeleteDialog">
+    <div class="panelContent">
+        <div class="tableRow">
+            <div class="tableColumn DeleteDialog_Icon">
+                <img alt="Delete Dialog Image" id="DeleteDialog_Image" />
+            </div>
+            <div id="DeleteDialog_MessageColumn" class="tableColumn">
+                <span id="DeleteDialog_Message">Are you sure?</span>
+            </div>
+            <div class="window-footer">
+                <button type="button" class="k-button" onclick="DeleteDialog.ButtonOnClick(this); return false;">No</button>
+                <button type="button" class="k-primary k-button" onclick="DeleteDialog.ButtonOnClick(this); return false;">Si</button>
+            </div>
+        </div>
+    </div>
+</div>

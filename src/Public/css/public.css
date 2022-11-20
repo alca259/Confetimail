@@ -1,0 +1,577 @@
+/******************************************************************
+* Hoja de estilos general de Confetimail
+* alca259 <alca259@gmail.com> - 2015
+******************************************************************/
+
+/******************************* COMMON MAIN CLASSES *******************************/
+body {
+    background-color: rgb(243, 243, 243);
+}
+
+a {
+    color: #5c7b89;
+}
+
+/******************************* COMMON CLASS MISC RELATED *******************************/
+.clear {
+    clear: both;
+}
+
+.noborder {
+    border: 0 !important;
+}
+
+.center {
+    text-align: center;
+}
+
+.row-middle-space {
+    height: 200px;
+}
+
+.featurette-divider-small {
+    margin: 40px 0;
+}
+
+.featurette-divider-top-small {
+    margin: 20px 0 80px 0;
+}
+
+/** Background de carga **/
+#loading .k-loading-mask {
+    position: fixed;
+}
+
+    #loading .k-loading-mask .k-loading-color {
+        background-color: #000;
+        -ms-opacity: 0.7;
+        opacity: 0.7;
+    }
+
+/** Arregla los containers dentro de un tabstrip **/
+.boxFix *,
+.boxFix *::before,
+.boxFix *::after {
+    -moz-box-sizing: border-box !important;
+    -webkit-box-sizing: border-box !important;
+    box-sizing: border-box !important;
+}
+
+/********************************** HOME SPECIFY **********************************/
+#HomePage a#FlechitaLinda {
+    /* display: block before hiding */
+    display: block;
+    display: none;
+    /* link is above all other elements */
+    z-index: 999;
+    /* link stays at same place on page */
+    position: fixed;
+    /* link goes at the bottom of the page */
+    top: 100%;
+    margin-top: -80px; /* = height + preferred bottom margin */
+    /* link is centered */
+    right: 5%;
+    margin-left: -40px; /* = half of width */
+    text-align: center;
+    /* round the corners (to your preference) */
+    -moz-border-radius: 24px;
+    -webkit-border-radius: 24px;
+    /* make it big and easy to see (size, style to preferences) */
+    width: 60px;
+    line-height: 48px;
+    height: 48px;
+    padding: 10px;
+    background: #000000;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+    #HomePage a#FlechitaLinda img {
+        -ms-opacity: 1 !important;
+        opacity: 1 !important;
+    }
+
+#HomePage #frontend-container {
+    background-image: url("/Public/img/layout/MainHeader.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    -ms-background-size: 80%;
+    background-size: 80%;
+}
+
+    #HomePage #frontend-container .img-circle {
+        border: 2px dashed #000;
+    }
+
+    #HomePage #frontend-container .inside-text {
+        font-size: 16px;
+        font-weight: bold;
+        position: absolute;
+        top: 24%;
+        left: 38.5%;
+        width: 90px;
+        color: #000;
+    }
+
+@media (max-width: 1199px) {
+    #HomePage #frontend-container .inside-text {
+        left: 45%;
+    }
+}
+
+@media (max-width: 991px) {
+    #HomePage #frontend-container .inside-text {
+        left: 44%;
+    }
+}
+
+@media (max-width: 720px) {
+    #HomePage #frontend-container .inside-text {
+        left: 43%;
+    }
+}
+
+@media (max-width: 500px) {
+    #HomePage #frontend-container .inside-text {
+        left: 40%;
+    }
+}
+
+/** Formulario de suscripción en página principal **/
+#HomePage #subscribeForm {
+    width: 80%;
+    margin: 0 auto;
+}
+
+    #HomePage #subscribeForm .panel {
+        background-color: #d0d0d0;
+        background-color: rgba(208, 208, 208, 0.8);
+        -ms-border-radius: 15px;
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+    }
+
+        #HomePage #subscribeForm .panel .panel-heading {
+            background-color: #f5f5f5;
+            background-color: rgba(245, 245, 245, 0.6);
+            -ms-border-radius: 15px 15px 0 0;
+            -webkit-border-radius: 15px 15px 0 0;
+            -moz-border-radius: 15px 15px 0 0;
+            border-radius: 15px 15px 0 0;
+        }
+
+    #HomePage #subscribeForm .row {
+        margin-bottom: 10px;
+    }
+
+        #HomePage #subscribeForm .row#endForm {
+            text-align: center;
+        }
+
+    #HomePage #subscribeForm .valido {
+        color: green !important;
+    }
+
+/********************************** ACCOUNT SPECIFY **********************************/
+#ProfilePage {
+    margin-top: 100px;
+}
+
+    #ProfilePage #tabProfile .k-content {
+        overflow-x: hidden;
+    }
+
+/********************************** SUBSCRIBE SPECIFY **********************************/
+#SubscribePage {
+    margin-top: 160px;
+}
+
+    /** Formulario de suscripción en página de suscripción **/
+    #SubscribePage #subscribeForm {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+        #SubscribePage #subscribeForm .panel {
+            background-color: #d0d0d0;
+            background-color: rgba(255, 255, 255, 0.6);
+            -ms-border-radius: 15px 15px 0 0;
+            -webkit-border-radius: 15px 15px 0 0;
+            -moz-border-radius: 15px 15px 0 0;
+            border-radius: 15px 15px 0 0;
+        }
+
+            #SubscribePage #subscribeForm .panel .panel-heading {
+                background-color: #f5f5f5;
+                background-color: rgba(228, 228, 228, 0.8);
+                -ms-border-radius: 15px 15px 0 0;
+                -webkit-border-radius: 15px 15px 0 0;
+                -moz-border-radius: 15px 15px 0 0;
+                border-radius: 15px 15px 0 0;
+            }
+
+        #SubscribePage #subscribeForm .row {
+            margin-bottom: 10px;
+        }
+
+            #SubscribePage #subscribeForm .row#endForm {
+                text-align: center;
+            }
+
+        #SubscribePage #subscribeForm .valido {
+            color: green !important;
+        }
+
+/********************************** LOGIN SPECIFY **********************************/
+#LoginPage {
+    margin-top: 160px;
+}
+
+    #LoginPage #loginForm .panel {
+        background-color: #d0d0d0;
+        background-color: rgba(255, 255, 255, 0.6);
+        -ms-border-radius: 15px;
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+    }
+
+        #LoginPage #loginForm .panel .panel-heading {
+            background-color: #f5f5f5;
+            background-color: rgba(228, 228, 228, 0.8);
+            -ms-border-radius: 15px 15px 0 0;
+            -webkit-border-radius: 15px 15px 0 0;
+            -moz-border-radius: 15px 15px 0 0;
+            border-radius: 15px 15px 0 0;
+        }
+
+    #LoginPage #loginForm {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+        #LoginPage #loginForm .row {
+            margin-bottom: 10px;
+        }
+
+            #LoginPage #loginForm .row#endForm {
+                text-align: center;
+            }
+
+        #LoginPage #loginForm .valido {
+            color: green !important;
+        }
+
+/********************************** BLOG SPECIFY **********************************/
+#BlogPage {
+    margin-top: 120px;
+}
+
+    #BlogPage #entries #blogContent .row {
+        margin-bottom: 55px;
+    }
+
+        #BlogPage #entries #blogContent .row .header {
+            margin-bottom: 30px;
+        }
+
+            #BlogPage #entries #blogContent .row .header .title {
+                font-size: 20pt;
+                font-weight: bold;
+            }
+
+        #BlogPage #entries #blogContent .row .blogcontent {
+            max-height: 164px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        #BlogPage #entries #blogContent .row .pull-right {
+            margin-top: 12px;
+        }
+
+    /** Paginación **/
+    #BlogPage #entries #blogPager {
+        border: 1px solid #e7e7e7;
+        background-color: #f8f8f8;
+        padding: 5px 10px;
+        margin-top: 15px;
+    }
+
+        #BlogPage #entries #blogPager .btn-group {
+            float: right;
+        }
+
+/********************************** BLOG ENTRY SPECIFY **********************************/
+#BlogReadPage {
+    margin-top: 120px;
+}
+
+    #BlogReadPage #entries #blogContent .row {
+        margin-bottom: 15px;
+    }
+
+        #BlogReadPage #entries #blogContent .row img {
+            min-width: 360px;
+            margin: 0 auto 20px auto;
+        }
+
+        #BlogReadPage #entries #blogContent .row .header {
+            margin-bottom: 30px;
+        }
+
+            #BlogReadPage #entries #blogContent .row .header .title {
+                font-size: 20pt;
+                font-weight: bold;
+            }
+
+        #BlogReadPage #entries #blogContent .row .blogcontent {
+            width: 100%;
+        }
+
+        #BlogReadPage #entries #blogContent .row .pull-right {
+            margin-top: 15px;
+        }
+
+    /** Formato de comentarios (Lectura) **/
+    #BlogReadPage #entries .row.reviewheader {
+        margin: 10px 0;
+        padding: 5px 15px;
+    }
+
+    #BlogReadPage #entries .row.reviewheader div.comment {
+        padding: 5px 15px;
+        background-color: #f1eafe;
+        -ms-border-radius: 5px;
+        border-radius: 5px;
+        border: 1px solid #ba9ce1;
+    }
+        
+    #BlogReadPage #entries .row.reviewheader div.alt-comment {
+        padding: 5px 15px;
+        background-color: #e9f8ff;
+        -ms-border-radius: 5px;
+        border-radius: 5px;
+        border: 1px solid #9cc8e1;
+    }
+
+    /** Nuevo comentario **/
+    #BlogReadPage #entries #commentNew {
+        padding: 15px;
+        margin: 15px 0;
+        border: 1px solid #e7e7e7;
+        background-color: #f8f8f8;
+    }
+
+/********************************** REVIEWS SPECIFY **********************************/
+
+/** Visualización de comentarios **/
+#ReviewPage {
+    margin-top: 120px;
+}
+
+    #ReviewPage #entries #reviewsContent .row.reviewheader {
+        margin: 10px 0;
+        padding: 5px;
+    }
+
+        #ReviewPage #entries #reviewsContent .row.reviewheader div.comment {
+            padding: 5px 15px;
+            background-color: #f1eafe;
+            -ms-border-radius: 5px;
+            border-radius: 5px;
+            border: 1px solid #ba9ce1;
+        }
+        
+        #ReviewPage #entries #reviewsContent .row.reviewheader div.alt-comment {
+            padding: 5px 15px;
+            background-color: #e9f8ff;
+            -ms-border-radius: 5px;
+            border-radius: 5px;
+            border: 1px solid #9cc8e1;
+        }
+
+        #ReviewPage #entries #reviewsContent .row.reviewheader .scoreText {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            color: rgb(90, 90, 90);
+            font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 13px;
+            font-stretch: normal;
+            font-style: normal;
+            font-variant: normal;
+            font-weight: 300;
+            line-height: 14.3px;
+            text-align: left;
+            vertical-align: baseline;
+        }
+
+    /** Nuevo comentario **/
+    #ReviewPage #reviewsNew {
+        padding: 15px;
+        margin: 15px 0;
+        border: 1px solid #e7e7e7;
+        background-color: #f8f8f8;
+    }
+
+        #ReviewPage #reviewsNew .rating {
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        #ReviewPage #reviewsNew .rating-input {
+            float: right;
+            width: 16px;
+            height: 16px;
+            padding: 0;
+            margin: 0 0 0 -16px !important;
+            opacity: 0;
+        }
+
+        #ReviewPage #reviewsNew .rating-star {
+            position: relative;
+            float: right;
+            display: block;
+            width: 16px;
+            height: 16px;
+            background: url('/Public/img/ui/star_two.png') 0 -16px;
+        }
+
+            #ReviewPage #reviewsNew .rating-star:hover,
+            #ReviewPage #reviewsNew .rating-star:hover ~ .rating-star,
+            #ReviewPage #reviewsNew .rating-input:checked ~ .rating-star {
+                background-position: 0 0;
+            }
+
+    /** Paginacion **/
+    #ReviewPage #entries #reviewsPager {
+        border: 1px solid #e7e7e7;
+        background-color: #f8f8f8;
+        padding: 5px 10px;
+        margin-top: 15px;
+    }
+
+        #ReviewPage #entries #reviewsPager .btn-group {
+            float: right;
+        }
+
+/********************************** STORE SPECIFY **********************************/
+#StorePage {
+    margin-top: 100px;
+}
+
+    #StorePage .row {
+        margin-bottom: 20px;
+    }
+
+    #StorePage .store-container {
+        background-color: #DDD;
+        -ms-border-radius: 15px;
+        border-radius: 15px;
+        padding: 15px 20px;
+    }
+
+        #StorePage .store-container img {
+            border: 1px solid #888;
+            -ms-border-radius: 15px;
+            border-radius: 15px;
+        }
+
+        #StorePage .store-container .price {
+            background-color: #d7c4fe;
+            float: left;
+            position: relative;
+            top: -45px;
+            left: 10px;
+            margin-top: 0;
+            display: block;
+            padding: 5px 15px;
+            -ms-border-radius: 5px;
+            border-radius: 5px;
+
+            color: #000;
+            font-weight: bold;
+            font-size: 14pt;
+        }
+
+        #StorePage .store-container .description {
+            display: block;
+            margin: 0 auto;
+            border-top: 1px solid #e4e4e4;
+            border-bottom: 1px solid #e4e4e4;
+            padding: 4px 0;
+            min-height: 30px;
+
+            color: #7b7a7a;
+            text-align: center;
+            font-size: 12px;
+            line-height: 15px;
+        }
+
+/********** SOCIAL NAV BAR *********/
+
+/*
+@media (max-width: 870px) {
+    #socialMenu {
+        display: none;
+    }
+}
+*/
+
+#socialMenu {
+    position: fixed;
+    bottom: 10%;
+}
+
+    #socialMenu li {
+        list-style: none;
+        height: 65px;
+        padding: 2px;
+        width: 62px;
+    }
+
+    #socialMenu span {
+        display: none;
+    }
+
+    #socialMenu a {
+        /* The background sprite: */
+        -ms-background-size: contain;
+        background-size: contain;
+        background-position: center center;
+        background-repeat: no-repeat;
+        height: 65px;
+        width: 62px;
+        display: block;
+        position: relative;
+    }
+
+    #socialMenu a:hover {
+        text-decoration: none;
+        /* CSS outer glow with the box-shadow property */
+        -moz-box-shadow: 0 0 5px #9ddff5;
+        -webkit-box-shadow: 0 0 5px #9ddff5;
+        -ms-box-shadow: 0 0 5px #9ddff5;
+        box-shadow: 0 0 5px #9ddff5;
+    }
+
+    #socialMenu .googlePlus {
+        background-image: url('/Public/img/ui/google.png');
+    }
+
+    #socialMenu .pinterest {
+        background-image: url('/Public/img/ui/pinterest.png');
+    }
+
+    #socialMenu .instagram {
+        background-image: url('/Public/img/ui/instagram.png');
+    }
+
+    #socialMenu .twitter {
+        background-image: url('/Public/img/ui/twitter.png');
+    }
+
+    #socialMenu .facebook {
+        background-image: url('/Public/img/ui/facebook.png');
+    }

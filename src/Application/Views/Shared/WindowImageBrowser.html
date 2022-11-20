@@ -1,0 +1,174 @@
+<style type="text/css">
+    .panelContent {
+        padding: 20px !important;
+    }
+</style>
+
+<script type="text/javascript">
+
+function ImageBrowserBox(url, urlImages, urlThumbnail, inputBack, data, width, height) {
+    showImageBrowserDialog = function () {
+        ImageBrowserDialog.ShowWindow({
+            title: "Seleccione una imagen",
+            url: url,
+            urlImages: urlImages,
+            urlThumbnail: urlThumbnail,
+            data: data == undefined ? "" : data,
+            height: height == undefined ? 600 : height,
+            width: width == undefined ? 640 : width,
+            okButton: "Seleccionar",
+            cancelButton: "Cancelar",
+            inputBack: inputBack
+        });
+    };
+    showImageBrowserDialog();
+}
+
+var ImageBrowserDialog = function () {
+    // Settings passed into the dialog.
+    var _settings = null;
+
+    var ShowWindow = function (settings) {
+        _settings = settings;
+
+        try {
+            $("#ImageBrowserDialog #imgBrowser").html("");
+            $("#ImageBrowserDialog #imgBrowser").kendoImageBrowser({
+                path: _settings.urlImages,
+                transport: {
+                    read: function (options) {
+                        $.ajax({
+                            url: _settings.url,
+                            type: "POST",
+                            dataType: "json",
+                            data: kendo.stringify(_settings.data),
+                            contentType: "application/json",
+                            success: function (response) {
+                                if (response.success) {
+                                    options.success(response.data.rows);
+                                } else {
+                                    AlertBox(response.message, "Warning", MessageBoxDialogs.ErrorIcon);
+                                    // Prevent default error
+                                    options.success([]);
+                                }
+                            },
+                            error: function (response) {
+                                AlertBox("Unknown error. Please, contact with the webmaster.", "Error", MessageBoxDialogs.ErrorIcon);
+                                console.log(response);
+                                // Prevent default error
+                                options.success([]);
+                            }
+                        });
+                    },
+                    thumbnailUrl: _settings.urlThumbnail,
+                    imageUrl: function (path, name) {
+                        return "/" + path;
+                    }
+                }
+            });
+
+            if (_settings.height != null) {
+                $('#ImageBrowserDialog').data("kendoWindow").setOptions({ height: _settings.height });
+            }
+            
+            if (_settings.width != null) {
+                $('#ImageBrowserDialog').data("kendoWindow").setOptions({ width: _settings.width });
+            }
+            
+            if (_settings.title != null) {
+                $('#ImageBrowserDialog').data("kendoWindow").setOptions({ title: _settings.title });
+            }
+
+            if (_settings.okButton != null) {
+                $("#okButton").html(_settings.okButton);
+            }
+
+            if (_settings.cancelButton != null) {
+                $("#cancelButton").html(_settings.cancelButton);
+            }
+
+            // Open the dialog.
+            $('#ImageBrowserDialog').data("kendoWindow").center().open();
+        }
+        catch (e) {
+            alert(e);
+        }
+    };
+
+    var Button_OnClick = function (button) {
+        var wnd = $('#ImageBrowserDialog').data("kendoWindow");
+        var imageBrowser = $("#ImageBrowserDialog #imgBrowser").data("kendoImageBrowser");
+        var selectedImage = $("#ImageBrowserDialog .k-imagebrowser").find(".k-state-selected");
+
+        var dataItem = null;
+        if (selectedImage != undefined) {
+            var uidSelectedImage = selectedImage.attr("data-uid");
+            if (uidSelectedImage != null) {
+                dataItem = imageBrowser.dataSource.getByUid(uidSelectedImage);
+            }
+        }
+
+        if (dataItem == null && button.textContent == _settings.okButton) {
+            AlertBox("Debes seleccionar una imagen");
+        } else {
+            wnd.close();
+
+            if (_settings.inputBack != null && button.textContent == _settings.okButton && dataItem != null) {
+                var path = "/" + imageBrowser._path + dataItem.id;
+                $(_settings.inputBack).val(path);
+                $(_settings.inputBack).trigger("change");
+            }
+        }
+    };
+
+    var Window_OnClose = function () {
+        var wnd = $('#ImageBrowserDialog').data("kendoWindow");
+
+        if (wnd === undefined || wnd == null) return;
+        wnd.close();
+    };
+
+    return {
+        ShowWindow: ShowWindow,
+        CloseWindow: Window_OnClose,
+        ButtonOnClick: Button_OnClick
+    };
+}();
+
+
+$(document).ready(function() {
+	
+    $("#ImageBrowserDialog").kendoWindow({
+        width: 640,
+		height: 600,
+		resizable: false,
+		draggable: false,
+		actions: [],
+		title: "Waiting...",
+		visible: false,
+		modal: true
+	});
+
+    // Deshabilitar ESC
+    $(function () {
+        kendo.ui.Window.fn._keydown = function (originalFn) {
+            var KEY_ESC = 27;
+            return function (e) {
+                if (e.which !== KEY_ESC) {
+                    originalFn.call(this, e);
+                }
+            };
+        }(kendo.ui.Window.fn._keydown);
+    });
+});
+</script>
+
+<div id="ImageBrowserDialog">
+    <div class="panelContent">
+        <div id="imgBrowser"></div>
+        <div class="window-footer">
+            <button type="button" id="okButton" class="k-primary k-button" onclick="ImageBrowserDialog.ButtonOnClick(this); return false;">Select</button>
+            <button type="button" id="cancelButton" class="k-button" onclick="ImageBrowserDialog.ButtonOnClick(this); return false;">Cancel</button>
+        </div>
+    </div>
+</div>

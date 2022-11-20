@@ -1,0 +1,704 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Confetimail\n"
+"POT-Creation-Date: 2015-11-21 23:21+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Alca259 <alca259@gmail.com>\n"
+"Language-Team: Confetimail <info@confetimail.net>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ../../..\n"
+"X-Poedit-KeywordsList: T_\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: AppCore/View.php:69 AppCore/View.php:118
+msgid "Page not found"
+msgstr "Page not found"
+
+#: Areas/Panel/Controllers/Users.controller.php:259
+#: Controllers/Account.controller.php:195
+#: Controllers/Account.controller.php:272
+#: Controllers/Account.controller.php:342
+#: Controllers/Account.controller.php:413
+#: Controllers/Account.controller.php:512 Controllers/Blog.controller.php:63
+#: Controllers/Blog.controller.php:160 Controllers/Blog.controller.php:297
+#: Controllers/Reviews.controller.php:48 Controllers/Reviews.controller.php:143
+msgid "Unathorized.Access"
+msgstr "Unathorized access. You don't enough privileges to do this."
+
+#: Areas/Panel/Controllers/Users.controller.php:265
+#: Areas/Panel/Controllers/Users.controller.php:278
+#: Controllers/Account.controller.php:151
+#: Controllers/Account.controller.php:209
+#: Controllers/Account.controller.php:280
+#: Controllers/Account.controller.php:347
+#: Controllers/Account.controller.php:358
+#: Controllers/Account.controller.php:418
+#: Controllers/Account.controller.php:517 Controllers/Blog.controller.php:99
+#: Controllers/Reviews.controller.php:82
+msgid "No.Data.Found"
+msgstr "No data was found"
+
+#: Areas/Panel/Controllers/Users.controller.php:293
+#, php-format
+msgid "The new password for user %s is [<b>%s</b>]"
+msgstr "The new password for user %s is [<b>%s</b>]"
+
+#: Controllers/Account.controller.php:105 Views/Shared/_PartialAdminMenu.php:57
+#: Views/Shared/_PartialMenu.php:92
+msgid "My.Account"
+msgstr "My account"
+
+#: Controllers/Account.controller.php:142
+#: Controllers/Account.controller.php:153
+#: Controllers/Account.controller.php:163
+msgid "Start.Session"
+msgstr "Login"
+
+#: Controllers/Account.controller.php:179 Views/Shared/_PartialMenu.php:27
+msgid "Subscribe"
+msgstr "Subscribe"
+
+#: Controllers/Account.controller.php:292
+#: Controllers/Account.controller.php:700
+msgid "User.Invalid.Credentials"
+msgstr "The credentials provided are invalid."
+
+#: Controllers/Account.controller.php:298
+#: Controllers/Account.controller.php:532 Views/Account/Index.php:278
+#: Views/Account/Subscribe.php:128 Views/Shared/_PartialSubscription.php:118
+msgid "Passwords.Not.Match"
+msgstr "The passwords not match"
+
+#: Controllers/Account.controller.php:545
+#: Controllers/Account.controller.php:666
+msgid "Field.X.Required"
+msgstr "The field %s is mandatory"
+
+#: Controllers/Account.controller.php:566
+msgid "Mail.Exists"
+msgstr "The mail %s is currently registered in our system."
+
+#: Controllers/Account.controller.php:581
+msgid "Mail.New.Register.Body"
+msgstr ""
+"A new user is registered with the data: \n"
+"Name: %s, Mail: %s"
+
+#: Controllers/Account.controller.php:582
+msgid "Mail.New.Register.Subject"
+msgstr "New subscription"
+
+#: Controllers/Account.controller.php:587
+msgid "Mail.Subscribe.Success"
+msgstr "Thanks for subscribe! You will receive shortly a email."
+
+#: Controllers/Account.controller.php:588
+msgid "Mail.Subscribe.Success.Warning"
+msgstr ""
+"Thanks for subscribe! We have technical problems with our email system and "
+"doesn't work properly, so it will take a little time to send our email ;)"
+
+#: Controllers/Account.controller.php:685
+msgid "User.Not.Exists.Or.Not.Active"
+msgstr "User %s does not exist or is not active"
+
+#: Controllers/Blog.controller.php:27 Controllers/Blog.controller.php:41
+#: Views/Shared/_PartialAdminMenu.php:27
+msgid "Blog"
+msgstr "Blog"
+
+#: Controllers/Blog.controller.php:77 Controllers/Blog.controller.php:173
+#: Controllers/Blog.controller.php:311 Controllers/Reviews.controller.php:62
+#: Controllers/Reviews.controller.php:157
+msgid "No.Required.Data.Found"
+msgstr "It has not received all the required information"
+
+#: Controllers/Home.controller.php:61 Views/Home/Index.php:40
+msgid "Carousel.Blog.Title"
+msgstr "Last post"
+
+#: Controllers/Home.controller.php:62 Controllers/Home.controller.php:73
+#: Views/Home/Index.php:41
+msgid "Carousel.Blog.Text"
+msgstr ""
+"Our deepest thoughts expose ourselves to the world through our blog posts. "
+"We hope you like them."
+
+#: Controllers/Home.controller.php:77 Views/Shared/_PartialAdminMenu.php:18
+#: Views/Shared/_PartialMenu.php:20
+msgid "Home"
+msgstr "Home"
+
+#: Controllers/Home.controller.php:90
+msgid "New install"
+msgstr "New installation"
+
+#: Controllers/Home.controller.php:162
+msgid "Invalid password"
+msgstr "Invalid password"
+
+#: Controllers/Reviews.controller.php:27 Views/Shared/_PartialAdminMenu.php:28
+#: Views/Shared/_PartialMenu.php:29
+msgid "Reviews"
+msgstr "Reviews"
+
+#: Controllers/Reviews.controller.php:199
+msgid "Bad.Or.Forgot.To.Rate"
+msgstr "Bad or I forgot to rate it"
+
+#: Controllers/Reviews.controller.php:200
+msgid "Not.For.Me"
+msgstr "This it not for me"
+
+#: Controllers/Reviews.controller.php:201
+msgid "Not.Bad"
+msgstr "Not bad"
+
+#: Controllers/Reviews.controller.php:202
+msgid "Good"
+msgstr "Good"
+
+#: Controllers/Reviews.controller.php:203
+msgid "Brilliant"
+msgstr "Brilliant"
+
+#: Controllers/Reviews.controller.php:204
+msgid "Excellent"
+msgstr "Excellent"
+
+#: Controllers/Store.controller.php:27 Views/Home/Index.php:97
+#: Views/Home/Index.php:98 Views/Shared/_PartialMenu.php:30
+msgid "Store"
+msgstr "Store"
+
+#: Views/Account/Index.php:18 Views/Shared/_PartialAdminMenu.php:59
+#: Views/Shared/_PartialMenu.php:92
+msgid "Profile"
+msgstr "Profile"
+
+#: Views/Account/Index.php:22
+msgid "Avatar"
+msgstr "Avatar"
+
+#: Views/Account/Index.php:24
+msgid "Edit"
+msgstr "Edit"
+
+#: Views/Account/Index.php:25 Views/Reviews/Index.php:39
+msgid "Save"
+msgstr "Save"
+
+#: Views/Account/Index.php:29 Views/Account/Subscribe.php:22
+#: Views/Shared/_PartialSubscription.php:11
+msgid "Name"
+msgstr "Name"
+
+#: Views/Account/Index.php:37
+msgid "Username"
+msgstr "Username"
+
+#: Views/Account/Index.php:44
+msgid "Avatar.Image"
+msgstr "Avatar"
+
+#: Views/Account/Index.php:51 Views/Account/Login.php:18
+#: Views/Account/Subscribe.php:37 Views/Shared/_PartialSubscription.php:29
+msgid "Mail"
+msgstr "E-mail"
+
+#: Views/Account/Index.php:58 Views/Account/Index.php:65
+#: Views/Account/Login.php:35 Views/Account/Subscribe.php:53
+#: Views/Shared/_PartialSubscription.php:48
+msgid "Password"
+msgstr "Password"
+
+#: Views/Account/Index.php:62
+msgid "Old.Password"
+msgstr "Old password"
+
+#: Views/Account/Index.php:68 Views/Account/Subscribe.php:69
+#: Views/Shared/_PartialSubscription.php:67
+msgid "Retype.Password"
+msgstr "Retype password"
+
+#: Views/Account/Index.php:73
+msgid "Change.Password"
+msgstr "Change password"
+
+#: Views/Account/Index.php:74
+msgid "Save.Change.Password"
+msgstr "Save changes"
+
+#: Views/Account/Index.php:79
+msgid "Web"
+msgstr "Web"
+
+#: Views/Account/Index.php:83
+msgid "Web.Url"
+msgstr "Web URL"
+
+#: Views/Account/Index.php:87
+msgid "Web.Name"
+msgstr "Web Name"
+
+#: Views/Account/Index.php:95
+msgid "Subscribed.Since"
+msgstr "Subscribed since"
+
+#: Views/Account/Index.php:102
+msgid "Subscribed"
+msgstr "Subscribed"
+
+#: Views/Account/Index.php:112
+msgid "Confeti.Mails"
+msgstr "Confeti Mails"
+
+#: Views/Account/Index.php:113
+msgid "Interest.Survey"
+msgstr "Interests"
+
+#: Views/Account/Index.php:259 Views/Account/Index.php:278
+#: Views/Account/Index.php:298 Views/Account/Index.php:375
+#: Views/Account/Index.php:380 Views/Blog/Reading.php:196
+#: Views/Blog/Reading.php:213 Views/Reviews/Index.php:84
+#: Views/Reviews/Index.php:101
+msgid "Error"
+msgstr "Error!"
+
+#: Views/Account/Index.php:313
+msgid "Unsubscribe.Me"
+msgstr "Unsubscribe me"
+
+#: Views/Account/Index.php:313
+msgid "Subscribe.Me"
+msgstr "Subscribe me"
+
+#: Views/Account/Login.php:12 Views/Shared/_PartialMenu.php:69
+msgid "Log.In"
+msgstr "Login"
+
+#: Views/Account/Login.php:25 Views/Account/Subscribe.php:44
+#: Views/Shared/_PartialSubscription.php:36
+msgid "Required.Mail"
+msgstr "The email is mandatory"
+
+#: Views/Account/Login.php:26 Views/Account/Subscribe.php:45
+#: Views/Shared/_PartialSubscription.php:37
+msgid "Invalid.Mail"
+msgstr "Does not seems to be a valid email address"
+
+#: Views/Account/Login.php:41 Views/Account/Subscribe.php:59
+#: Views/Shared/_PartialSubscription.php:54
+msgid "Required.Password"
+msgstr "Password is mandatory"
+
+#: Views/Account/Login.php:51 Views/Account/Subscribe.php:84
+#: Views/Shared/_PartialSubscription.php:85
+msgid "Submit"
+msgstr "Submit"
+
+#: Views/Account/Subscribe.php:6
+msgid "Subscribe.Welcome.Title"
+msgstr "Welcome to Confetimail!"
+
+#: Views/Account/Subscribe.php:7
+msgid "Subscribe.Welcome.Text"
+msgstr ""
+"<h4> Why subscribe to Confetimail.net? </ h4>\n"
+"<p> If you subscribe, you not only receive our monthly newsletter with all "
+"of the recommendations we make, but also get downloadable graphic content "
+"made by us. </ p>\n"
+"<p> To modify your data or to unsubscribe, just login, and go to your "
+"profile. </ p>\n"
+"\n"
+"<p> What legally supposed to subscribe to a news content on the Internet? "
+"Check out the Data Protection Act in the bottom menu. </p>\n"
+"\n"
+"<p> If you have any questions or technical problems you can contact us at <a "
+"href=\"mailto:info@confetimail.net\"> info@confetimail.net</a> </ p>"
+
+#: Views/Account/Subscribe.php:15 Views/Shared/_PartialSubscription.php:4
+msgid "Receive.Email.Explosion"
+msgstr "Receive our monthly email an explosion of color!"
+
+#: Views/Account/Subscribe.php:29 Views/Shared/_PartialSubscription.php:18
+msgid "Required.Name"
+msgstr "Name is mandatory"
+
+#: Views/Account/Subscribe.php:30 Views/Shared/_PartialSubscription.php:19
+msgid "Placeholder.Name"
+msgstr "Display name"
+
+#: Views/Account/Subscribe.php:46 Views/Shared/_PartialSubscription.php:38
+msgid "Placeholder.Mail"
+msgstr "A mail where we can send confetis ;)"
+
+#: Views/Account/Subscribe.php:62 Views/Shared/_PartialSubscription.php:57
+msgid "Placeholder.Password"
+msgstr "Pick up your password"
+
+#: Views/Account/Subscribe.php:75 Views/Shared/_PartialSubscription.php:73
+msgid "Required.Verify.Password"
+msgstr "The password confirmation is mandatory"
+
+#: Views/Account/Subscribe.php:78 Views/Shared/_PartialSubscription.php:76
+msgid "Placeholder.Retype.Password"
+msgstr "Repeat your password for verify"
+
+#: Views/Account/Subscribe.php:185 Views/Shared/_PartialSubscription.php:175
+msgid "Unknown.Error"
+msgstr "Unknown error. Please, contact with the webmaster."
+
+#: Views/Blog/Index.php:149 Views/Blog/Reading.php:61
+#: Views/Reviews/Index.php:18
+msgid "Comments"
+msgstr "Comments"
+
+#: Views/Blog/Reading.php:67
+msgid "Publish"
+msgstr "Publish"
+
+#: Views/Blog/Reading.php:196
+msgid "Comments.Are.Mandatory"
+msgstr "Comments are mandatory!"
+
+#: Views/Home/Index.php:27
+msgid "Carousel.Tematica.Button.Extra.Text"
+msgstr "Still you not have subscribed?"
+
+#: Views/Home/Index.php:28
+msgid "Carousel.Tematica.Button"
+msgstr "Subscribe!"
+
+#: Views/Home/Index.php:42
+msgid "Carousel.Blog.Button"
+msgstr "Show post"
+
+#: Views/Home/Index.php:51
+msgid "Carousel.Store.Title"
+msgstr "Our store"
+
+#: Views/Home/Index.php:52
+msgid "Carousel.Store.Text"
+msgstr "Come and see our products, maybe there is someone you like"
+
+#: Views/Home/Index.php:53
+msgid "Carousel.Store.Button"
+msgstr "Show products"
+
+#: Views/Home/Index.php:62
+msgid "Previous"
+msgstr "Previous"
+
+#: Views/Home/Index.php:66
+msgid "Next"
+msgstr "Next"
+
+#: Views/Home/Index.php:76
+msgid "Pick.Up.Your.Confeti"
+msgstr "Choose your confeti"
+
+#: Views/Home/Index.php:83 Views/Home/Index.php:84
+msgid "Previous.Editions"
+msgstr "Past editions"
+
+#: Views/Home/Index.php:90 Views/Home/Index.php:91
+msgid "Review.Users"
+msgstr "Users reviews"
+
+#: Views/Home/Index.php:114
+msgid "What.Is.Confeti.Title"
+msgstr "What is Confetimail?"
+
+#: Views/Home/Index.php:116
+msgid "What.Is.Confeti.P1"
+msgstr ""
+"<b> Confeti Mail </ b> is a free subscription service to a newsletter.\n"
+"Each month you will receive in your e-mail a sneak package\n"
+"in which they will be including content types pod & eacute; is seen in the "
+"image.\n"
+"<br />"
+
+#: Views/Home/Index.php:120
+msgid "What.Is.Confeti.P1.Image"
+msgstr "Part of what is included in Confeti"
+
+#: Views/Home/Index.php:127
+msgid "What.Is.Confeti.P2"
+msgstr ""
+"The theme of the graphics included in Confeti Mail is the same for\n"
+"all the gifts of the month, unless the printable and recommendations\n"
+"that will be more general."
+
+#: Views/Home/Index.php:130
+msgid "What.Is.Confeti.P3"
+msgstr "For any further information please contact us at:"
+
+#: Views/Home/Index.php:134
+msgid "What.Is.Confeti.P4"
+msgstr ""
+"<b> Important: </ bbr />\n"
+"They are received in the mail the Confeti Mail from the month of "
+"registration. Thus, if you registered in July, June can not directly "
+"receive. <br />\n"
+"<br />\n"
+"If you are interested, you can make a request through our social networks "
+"for someone who has it forward it to you. <br />"
+
+#: Views/Home/Index.php:148
+msgid "History.Confeti.Title"
+msgstr "History"
+
+#: Views/Home/Index.php:150
+msgid "History.Confeti.P1"
+msgstr ""
+"<b> Confeti Mail </ b> is born as an alternative to monthly format boxes\n"
+"physical. The idea of sending mail boxes looked really fun, but be "
+"adventurous\n"
+"a new era very risky. So we came to take virtual plane, and therefore the\n"
+"rules should change."
+
+#: Views/Home/Index.php:154
+msgid "History.Confeti.P1.Image"
+msgstr "Authors of Confeti"
+
+#: Views/Home/Index.php:160
+msgid "History.Confeti.P2"
+msgstr ""
+"After a productive day creatively, he began to grow gradually this\n"
+"project until we decided to release it for real. Leading this feat we are\n"
+"<b> Laura Confetti </ b> and <b> Carlos Mail </ b>."
+
+#: Views/Home/Index.php:163
+msgid "History.Confeti.P3"
+msgstr ""
+"<b> Laura Confetti </ b> was born there in 1985, while the film <i> Back to "
+"the Future </ i>, to\n"
+"color fill everything in its path. Despite not having studied formal "
+"training related to the world\n"
+"design, from good girl has been fully involved either for one thing or "
+"another."
+
+#: Views/Home/Index.php:166
+msgid "History.Confeti.P4"
+msgstr ""
+"<b> Carlos Email </ b> came somewhat later, in 1988. Since childhood was "
+"passionate about\n"
+"video games and computers. He could not study computer science at first, but "
+"when he arrived,\n"
+"and he could not stop."
+
+#: Views/Home/Index.php:174
+msgid "Write.About.Us.Title"
+msgstr "Wrote about us"
+
+#: Views/Home/Index.php:180
+msgid "Write.About.Us.P1.Image"
+msgstr "Redhead Sense"
+
+#: Views/Home/Index.php:185
+msgid "Write.About.Us.P2.Image"
+msgstr "Patypeando"
+
+#: Views/Home/Index.php:190
+msgid "Write.About.Us.P3.Image"
+msgstr "Cuaderno de retales"
+
+#: Views/Home/Index.php:198
+msgid "Write.About.Us.P4.Image"
+msgstr "Paniculata"
+
+#: Views/Home/Index.php:203
+msgid "Write.About.Us.P5.Image"
+msgstr "I'm just a nailaholic!"
+
+#: Views/Home/Index.php:208
+msgid "Write.About.Us.P6.Image"
+msgstr "Mi burbuja, mis normas"
+
+#: Views/Home/Index.php:216
+msgid "Past.Months.Title"
+msgstr "Previous themes"
+
+#: Views/Home/Index.php:251
+msgid "Social.Networks"
+msgstr "Social networks"
+
+#: Views/Home/Index.php:265 Views/Shared/_LayoutFooter.php:10
+msgid "Up"
+msgstr "Up"
+
+#: Views/Home/Install.php:30
+msgid "Config.Database.Title"
+msgstr "Configuration database for Confeti Mail"
+
+#: Views/Home/Install.php:40 Views/Home/Install.php:42
+msgid "Config.Database.Start"
+msgstr "Start database"
+
+#: Views/Home/Install.php:40 Views/Home/Install.php:42
+msgid "Done"
+msgstr "Done"
+
+#: Views/Home/Install.php:61
+msgid "Config.Database.AdminPassword"
+msgstr "Password of administrator"
+
+#: Views/Home/Install.php:61
+msgid "Config.Database.Description"
+msgstr ""
+"This launches the initialization of the basic tables for implementation"
+
+#: Views/Home/Install.php:61
+msgid "Save.And.Finish"
+msgstr "Save and finish"
+
+#: Views/Home/Install.php:73
+msgid "Config.Database.Ready"
+msgstr "Database is ready for use."
+
+#: Views/Home/Install.php:75
+msgid "Return.Back"
+msgstr "Return back"
+
+#: Views/Reviews/Index.php:24
+msgid "Score"
+msgstr "Score"
+
+#: Views/Reviews/Index.php:84
+msgid "Comments.Mandatory"
+msgstr "The comments are mandatory, please, don't forget to rate us."
+
+#: Views/Shared/_LayoutFooter.php:14
+msgid "Cookies"
+msgstr "Cookies"
+
+#: Views/Shared/_LayoutFooter.php:15
+msgid "Terms"
+msgstr "Terms"
+
+#: Views/Shared/_LayoutFooter.php:26
+msgid "Text.Cookies"
+msgstr ""
+"<p> A cookie is a small piece of text that Confetimail sent to the browser "
+"to remember information about your visit. Thanks to them we can facilitate "
+"your next visit and make the site more useful. Cookies play a very important "
+"role, because without them the use of the Web would be a more frustrating "
+"experience. </p>\n"
+"\n"
+"<p> Confetimail uses cookies for various purposes such as counting the "
+"number of visits we receive, etc. </p>\n"
+"\n"
+"<p> Then you can view the cookies used in Confetimail. </p>\n"
+"\n"
+"<p> <b> Customize </b> <br/>\n"
+"Confetimail uses cookies to store your viewing of the site, thanks to this "
+"cookie can remember the user's language. </p>\n"
+"\n"
+"<p> <b> Processes </b> <br/> Without them, the website may not work "
+"properly. </p>\n"
+"\n"
+"<p> <b> Google Analytics </b><br />\n"
+"Google Analytics is a free web analysis tool of Google that primarily allows "
+"website owners know how users interact with your website. You also enable "
+"cookies in the domain of the site where you are and uses a set of cookies to "
+"collect information anonymously and report website trends without "
+"identifying individual users. </p>\n"
+"\n"
+"<p> By accessing our website, you accept our use of cookies. </p>"
+
+#: Views/Shared/_PartialAdminMenu.php:5 Views/Shared/_PartialMenu.php:7
+msgid "Toggle.Navigation"
+msgstr "Toggle Navigation"
+
+#: Views/Shared/_PartialAdminMenu.php:19
+msgid "Users"
+msgstr "Users"
+
+#: Views/Shared/_PartialAdminMenu.php:20 Views/Shared/_PartialAdminMenu.php:21
+msgid "Files"
+msgstr "Files"
+
+#: Views/Shared/_PartialAdminMenu.php:22
+msgid "New.File"
+msgstr "New file"
+
+#: Views/Shared/_PartialAdminMenu.php:24
+msgid "Mails"
+msgstr "Mails"
+
+#: Views/Shared/_PartialAdminMenu.php:25
+msgid "Structure"
+msgstr "Structure"
+
+#: Views/Shared/_PartialAdminMenu.php:26
+msgid "Security"
+msgstr "Security"
+
+#: Views/Shared/_PartialAdminMenu.php:61 Views/Shared/_PartialMenu.php:92
+msgid "Log.Out"
+msgstr "Log out"
+
+#: Views/Shared/_PartialMenu.php:22
+msgid "What.Is"
+msgstr "What is?"
+
+#: Views/Shared/_PartialMenu.php:23
+msgid "History"
+msgstr "History"
+
+#: Views/Shared/_PartialMenu.php:24
+msgid "Write.About.Us"
+msgstr "Wrote about us.."
+
+#: Views/Shared/_PartialMenu.php:25
+msgid "Past.Months"
+msgstr "Past editions"
+
+#: Views/Shared/_PartialMenu.php:28
+msgid "Our.Blog"
+msgstr "Our blog"
+
+#: Views/Shared/_PartialMenu.php:62
+msgid "English"
+msgstr "English"
+
+#: Views/Shared/_PartialMenu.php:63
+msgid "Spanish"
+msgstr "Spanish"
+
+#: Views/Shared/_PartialMenu.php:75
+msgid "Admin"
+msgstr "Admin"
+
+#: Views/Store/Index.php:11
+msgid "Product.Text.1"
+msgstr ""
+"What do you feel like drinking today? With our fabulous mug, you can choose "
+"one of the recommended or that you will want.\n"
+"<br />+Shipping"
+
+#: Views/Store/Index.php:20
+msgid "Product.Text.2"
+msgstr ""
+"Start the morning with energy through revitalizing cup potion.\n"
+"<br />+Shipping"
+
+#: Views/Store/Index.php:27
+msgid "Store.Text.Selling"
+msgstr ""
+"<p> If you want any of the products listed, please contact us via e <a "
+"href='mailto:info@confetimail.net'>  info@confetimail.net. </a></ p>\n"
+"<p> We will be happy to assist. Thank you very much </ p>"
+
+#~ msgid "The new password for user %s is %s"
+#~ msgstr "The new password for user %s is %s"
+
+#~ msgid "Continue.Reading"
+#~ msgstr "Continue reading..."

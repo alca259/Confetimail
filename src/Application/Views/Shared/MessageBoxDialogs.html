@@ -1,0 +1,65 @@
+﻿<script type="text/javascript">
+    $(document).ready(function() {
+        $("#AlertDialog").kendoWindow({
+            width: "500px",
+            height: "200px",
+            title: "Alerta",
+            actions: ["Close"],
+            visible: false,
+            modal: true,
+            draggable: false,
+            resizable: false
+        }).data("kendoWindow");
+
+        $("#ConfirmDialog").kendoWindow({
+            width: "500px",
+            height: "200px",
+            title: "Confirmar acción",
+            actions: ["Close"],
+            visible: false,
+            modal: true,
+            draggable: false,
+            resizable: false
+        }).data("kendoWindow");
+    });
+</script>
+
+<div id="AlertDialog">
+    <div class="panelContent">
+        <div class="tableRow">
+            <div class="tableColumn" style="float: left; width: 80px;">
+                <img alt="Alert Dialog Image" id="AlertDialog_Image" />
+            </div>
+            <div id="AlertDialog_MessageColumn" class="tableColumn">
+                <span id="AlertDialog_Message"></span>
+            </div>
+        </div>
+        <br />
+        <div id="AlertDialog_ButtonRow" class="tableButtonRow" style="width: auto;">
+            <div class="tableColumn" style="width: 100%; text-align: center;">
+                <button id="AlertDialog_OkButton" class="btn btn_red" onclick="AlertDialog.OkButton_OnClick(); return false;">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ConfirmDialog">
+    <div class="panelContent">
+        <div class="tableRow">
+            <div class="tableColumn" style="float: left; width: 80px;">
+                <img alt="Confirm Dialog Image" id="ConfirmDialog_Image" />
+            </div>
+            <div id="ConfirmDialog_MessageColumn" class="tableColumn">
+                <span id="ConfirmDialog_Message"></span>
+            </div>
+        </div>
+        <br />
+        <div id="ConfirmDialog_ButtonRow" class="tableButtonRow" style="width:auto;">
+            <div class="tableColumn" style="width:100%; text-align:center;">
+                <button id="ConfirmDialog_YesButton" class="btn btn_red btn-primary" onclick="ConfirmDialog.Button_OnClick('Yes'); return false;">Confirmar</button>
+                <span style="width:5px;">&nbsp;</span>
+                <button id="ConfirmDialog_NoButton" class="btn" onclick="ConfirmDialog.Button_OnClick('No'); return false;">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

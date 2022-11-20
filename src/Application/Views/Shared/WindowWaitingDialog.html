@@ -1,0 +1,117 @@
+<style type="text/css">
+    .panelContent {
+        padding: 20px !important;
+    }
+</style>
+
+<script type="text/javascript">
+var LoadingIcon = "/Public/img/ui/ajax-loader.gif";
+
+/// <summary>
+/// Show the WaitDialog.
+/// <summary>
+/// <param name="settings" type="JSON object">
+/// Contains all the settings for the dialog.
+// </param>
+function WaitBox(message, title, width, height) {
+    showWaitDialog = function () {
+        WaitDialog.ShowWindow({
+            title: title == undefined ? "Espere" : title,
+            message: message,
+            height: height == undefined ? 200 : height,
+            width: width == undefined ? 80 : width,
+            icon: LoadingIcon
+        });
+    };
+    showWaitDialog();
+}
+
+var WaitDialog = function () {
+    // Settings passed into the dialog.
+    var _settings = null;
+
+    var ShowWindow = function (settings) {
+        _settings = settings;
+
+        try {
+
+            if (_settings.height != null) {
+            	$('#WaitDialog').data("kendoWindow").setOptions({ height: _settings.height });
+            }
+            
+            if (_settings.width != null) {
+            	$('#WaitDialog').data("kendoWindow").setOptions({ width: _settings.width });
+                $('#WaitDialog_MessageColumn').css('max-width', (parseInt(_settings.width.toString().replace('px', '') - 100) + 'px'));
+            }
+            
+            if (_settings.title != null) {
+            	$('#WaitDialog').data("kendoWindow").setOptions({ title: _settings.title });
+            }
+
+            $('#WaitDialog_Image').attr("src", _settings.icon);
+            $('#WaitDialog_Message').text(_settings.message);
+
+            // Open the dialog.
+            //var x = ($(window).width() - $("#WaitDialog").jqxWindow('width')) / 2 + $(window).scrollLeft();
+            //var y = ($(window).height() - $("#WaitDialog").jqxWindow('height')) / 2 + $(window).scrollTop();
+            //$('#WaitDialog').jqxWindow({ position: { x: x, y: y} });
+            $('#WaitDialog').data("kendoWindow").center().open();
+        }
+        catch (e) {
+            alert(e);
+        }
+    };
+
+    var Window_OnClose = function () {
+        var wnd = $('#WaitDialog').data("kendoWindow");
+
+        if (wnd === undefined || wnd == null) return;
+        wnd.close();
+    };
+
+    return {
+        ShowWindow: ShowWindow,
+        CloseWindow: Window_OnClose
+    };
+}();
+
+
+$(document).ready(function() {
+	
+	$("#WaitDialog").kendoWindow({
+		width: 200,
+		height: 80,
+		resizable: false,
+		draggable: false,
+		actions: [],
+		title: "Waiting...",
+		visible: false,
+		modal: true
+	});
+
+    // Deshabilitar ESC
+    $(function () {
+        kendo.ui.Window.fn._keydown = function (originalFn) {
+            var KEY_ESC = 27;
+            return function (e) {
+                if (e.which !== KEY_ESC) {
+                    originalFn.call(this, e);
+                }
+            };
+        }(kendo.ui.Window.fn._keydown);
+    });
+});
+</script>
+
+<div id="WaitDialog">
+	<div class="panelContent">
+		<div class="tableRow">
+			<div class="tableColumn" style="float: left; width: 50px;">
+				<img alt="Wait Dialog Image" id="WaitDialog_Image" />
+			</div>
+			<div id="WaitDialog_MessageColumn" class="tableColumn">
+				<span id="WaitDialog_Message">Please wait...</span>
+			</div>
+		</div>
+	</div>
+</div>

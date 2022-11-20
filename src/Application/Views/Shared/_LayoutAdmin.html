@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+    <!-- title -->
+    <title>Confetimail - {{ Title }}</title>
+
+    <!-- metatags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/Public/img/ui/favicon.ico">
+
+    <!-- css -->
+    <link href="/Public/css/reset.css" rel="stylesheet">
+    <!--<link href="/Public/css/bootstrap.css" rel="stylesheet">-->
+    <link href="/Public/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="/Public/css/administration.css" rel="stylesheet">
+
+    <!-- kendo css -->
+    <link href="/Public/css/kendo/kendo.common.min.css" rel="stylesheet">
+    <link href="/Public/css/kendo/kendo.bootstrap.min.css" rel="stylesheet">
+    <link href="/Public/css/kendo/kendo.dataviz.min.css" rel="stylesheet">
+    <link href="/Public/css/kendo/kendo.dataviz.bootstrap.min.css" rel="stylesheet">
+
+    <!-- css viewport -->
+    <link href="/Public/css/style-viewport.css" rel="stylesheet">
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Required by all applications -->
+    <script src="/Public/js/jquery-2.1.4.min.js"></script>
+    <script src="/Public/js/bootstrap.js"></script>
+    <script src="/Public/js/jszip.min.js"></script>
+
+    <!-- Kendo core JavaScript
+    ================================================== -->
+    <!-- Required by all applications -->
+    <script src="/Public/js/kendo/kendo.all.min.js"></script>
+    <script src="/Public/js/kendo/cultures/kendo.culture.es-ES.min.js"></script>
+    <script src="/Public/js/kendo/messages/kendo.messages.es-ES.js"></script>
+    <script src="/Public/js/kendo/kendo.modernizr.custom.js"></script>
+    <script type="text/javascript">
+        kendo.culture("es-ES");
+    </script>
+
+    <script src="/Public/js/administration.js"></script>
+    <script src="/Public/js/json_parse.js"></script>
+
+</head>
+<body>
+
+    <div id="mainwindow">
+        <!-- Nav bar -->
+        {{ RenderPartial("_PartialAdminMenu") }}
+
+        {{ RenderBody }}
+
+    </div>
+
+    <div id="loading"></div>
+
+    <!-- Application core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/Public/js/MessageBoxDialogs.js"></script>
+
+    {{ RenderPartial("MessageBoxDialogs") }}
+
+    <!-- Google analytics
+    ================================================= -->
+    <script type="text/javascript">
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments);
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m);
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-51940059-1', 'confetimail.net');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>
